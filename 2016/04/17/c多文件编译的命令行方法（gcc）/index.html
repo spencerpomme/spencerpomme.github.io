@@ -64,16 +64,11 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="record" />
+  <meta name="keywords" content="gcc," />
 
 
 
 
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> origin/gh-pages
 
   <link rel="alternate" href="/atom.xml" title="品森" type="application/atom+xml" />
 
@@ -87,30 +82,16 @@
 
 
 
-<meta name="description" content="About
-关于作者   工常邵不是本名，而是注册知乎的时候用字典随机取的一个名字。
-   我的本专业是城市规划，接受过系统的建筑学教育，但是不喜欢做不自由的设计。喜欢写代码，正在成长为一个初级码农。脑子清醒的时候学习数据结构和算法，刷leetcode题目；其它时候我都在努力从脑洞里爬出来。
-   业余时间喜欢研究厨艺，混迹A站和B站。
-技术方向   自学了python、c作为平常主要使用的语言，">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://spencerpomme.github.io/about/index.html">
+<meta name="description" content="之前在学习数据结构的时候（现在还没有学完orz）发现，其实学习到后边的树、图之类的数据结构的时候，经常会用到stack和queue这两个更为基础的数据结构，需要经常性地包含它们的头文件。一直以来都直接用IDE来做这个事情，直到有一天觉得每次做题都要新建一个工程然后添加文件很麻烦，就决定把常用数据结构的.c和.h放在一个文件夹里，题目做完了就把problem.c放到这个文件夹里用命令行编译一下就得了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c多文件编译的命令行方法（gcc）">
+<meta property="og:url" content="http://spencerpomme.github.io/2016/04/17/c多文件编译的命令行方法（gcc）/index.html">
 <meta property="og:site_name" content="品森">
-<meta property="og:description" content="About
-关于作者   工常邵不是本名，而是注册知乎的时候用字典随机取的一个名字。
-   我的本专业是城市规划，接受过系统的建筑学教育，但是不喜欢做不自由的设计。喜欢写代码，正在成长为一个初级码农。脑子清醒的时候学习数据结构和算法，刷leetcode题目；其它时候我都在努力从脑洞里爬出来。
-   业余时间喜欢研究厨艺，混迹A站和B站。
-技术方向   自学了python、c作为平常主要使用的语言，">
-<meta property="og:image" content="http://spencerpomme.github.io/images/pinsent.png">
-<meta property="og:updated_time" content="2016-04-17T07:08:45.000Z">
+<meta property="og:description" content="之前在学习数据结构的时候（现在还没有学完orz）发现，其实学习到后边的树、图之类的数据结构的时候，经常会用到stack和queue这两个更为基础的数据结构，需要经常性地包含它们的头文件。一直以来都直接用IDE来做这个事情，直到有一天觉得每次做题都要新建一个工程然后添加文件很麻烦，就决定把常用数据结构的.c和.h放在一个文件夹里，题目做完了就把problem.c放到这个文件夹里用命令行编译一下就得了">
+<meta property="og:updated_time" content="2016-04-17T07:59:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="About
-关于作者   工常邵不是本名，而是注册知乎的时候用字典随机取的一个名字。
-   我的本专业是城市规划，接受过系统的建筑学教育，但是不喜欢做不自由的设计。喜欢写代码，正在成长为一个初级码农。脑子清醒的时候学习数据结构和算法，刷leetcode题目；其它时候我都在努力从脑洞里爬出来。
-   业余时间喜欢研究厨艺，混迹A站和B站。
-技术方向   自学了python、c作为平常主要使用的语言，">
-<meta name="twitter:image" content="http://spencerpomme.github.io/images/pinsent.png">
+<meta name="twitter:title" content="c多文件编译的命令行方法（gcc）">
+<meta name="twitter:description" content="之前在学习数据结构的时候（现在还没有学完orz）发现，其实学习到后边的树、图之类的数据结构的时候，经常会用到stack和queue这两个更为基础的数据结构，需要经常性地包含它们的头文件。一直以来都直接用IDE来做这个事情，直到有一天觉得每次做题都要新建一个工程然后添加文件很麻烦，就决定把常用数据结构的.c和.h放在一个文件夹里，题目做完了就把problem.c放到这个文件夹里用命令行编译一下就得了">
 
 
 
@@ -128,13 +109,7 @@
   };
 </script>
 
-  <title>
-  
-
-  
-    about | 品森
-  
-</title>
+  <title> c多文件编译的命令行方法（gcc） | 品森 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -155,7 +130,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -245,15 +220,160 @@
 
   <div id="posts" class="posts-expand">
     
-    
-      <h1 id="About"><a href="#About" class="headerlink" title="About"></a>About</h1><p><img src="/images/pinsent.png" alt="cover"></p>
-<h4 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h4><p>   工常邵不是本名，而是注册知乎的时候用字典随机取的一个名字。</p>
-<p>   我的本专业是城市规划，接受过系统的建筑学教育，但是不喜欢做不自由的设计。喜欢写代码，正在成长为一个初级码农。脑子清醒的时候学习数据结构和算法，刷leetcode题目；其它时候我都在努力从脑洞里爬出来。</p>
-<p>   业余时间喜欢研究厨艺，混迹A站和B站。</p>
-<h4 id="技术方向"><a href="#技术方向" class="headerlink" title="技术方向"></a>技术方向</h4><p>   自学了python、c作为平常主要使用的语言，使用R来做统计分析和数据可视化，了解一点数据库。希望将来可以将CS方面的知识和城市规划相结合，在智慧城市方面专注求索。谋生的手段则是城市规划师和建筑师都会做的那套东西，有时候也会做做平面设计自娱自乐。</p>
-<h4 id="品森"><a href="#品森" class="headerlink" title="品森"></a>品森</h4><p>   这是一个personal的博客，会记录很多林林总总，但是希望可以记录下自己的点滴成长，无论是技术还是其它。就像slogan所说的，是我一人的呓语：）如果你能从中发现对你有用或者喜欢的内容，我也会很高兴，欢迎与我交流。</p>
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                c多文件编译的命令行方法（gcc）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-17T15:27:07+08:00" content="2016-04-17">
+              2016-04-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/17/c多文件编译的命令行方法（gcc）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/17/c多文件编译的命令行方法（gcc）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/17/c多文件编译的命令行方法（gcc）/" class="leancloud_visitors" data-flag-title="c多文件编译的命令行方法（gcc）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前在学习数据结构的时候（现在还没有学完orz）发现，其实学习到后边的树、图之类的数据结构的时候，经常会用到stack和queue这两个更为基础的数据结构，需要经常性地包含它们的头文件。一直以来都直接用IDE来做这个事情，直到有一天觉得每次做题都要新建一个工程然后添加文件很麻烦，就决定把常用数据结构的.c和.h放在一个文件夹里，题目做完了就把problem.c放到这个文件夹里用命令行编译一下就得了。</p>
+<p>其实挺起来好像还是挺麻烦的，不过就当作是增添一项新经验也好。具体做法如下：（以stack.c和stack.h为例）</p>
+<ol>
+<li>把需要一起变一的文件都放入一个directory里边去</li>
+<li><p>cmd/powershell(windows平台)进行如下操作：</p>
+<p> <code>&gt;&gt;&gt; gcc -std=c99 stack.c problem.c -o main</code></p>
+</li>
+</ol>
+<p>这样在文件夹里就会出现一个名为main.exe的文件了。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gcc/" rel="tag">#gcc</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/16/testing/" rel="next" title="testing">
+                <i class="fa fa-chevron-left"></i> testing
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/04/17/c多文件编译的命令行方法（gcc）/"
+     data-title="c多文件编译的命令行方法（gcc）"
+     data-content=""
+     data-url="http://spencerpomme.github.io/2016/04/17/c多文件编译的命令行方法（gcc）/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
   </div>
 
 
@@ -262,6 +382,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/17/c多文件编译的命令行方法（gcc）/"
+           data-title="c多文件编译的命令行方法（gcc）" data-url="http://spencerpomme.github.io/2016/04/17/c多文件编译的命令行方法（gcc）/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -281,8 +409,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -293,11 +430,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-<<<<<<< HEAD
-              <span class="site-state-item-count">1</span>
-=======
               <span class="site-state-item-count">2</span>
->>>>>>> origin/gh-pages
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -305,8 +438,6 @@
           
 
           
-<<<<<<< HEAD
-=======
             <div class="site-state-item site-state-tags">
               <a href="/tags">
                 <span class="site-state-item-count">1</span>
@@ -314,7 +445,6 @@
               </a>
             </div>
           
->>>>>>> origin/gh-pages
 
         </nav>
 
@@ -374,6 +504,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -477,6 +618,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
