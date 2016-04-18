@@ -44,24 +44,4 @@
     
   </entry>
   
-  <entry>
-    <title>testing</title>
-    <link href="http://spencerpomme.github.io/2016/04/16/testing/"/>
-    <id>http://spencerpomme.github.io/2016/04/16/testing/</id>
-    <published>2016-04-16T08:41:54.000Z</published>
-    <updated>2016-04-16T08:42:29.000Z</updated>
-    
-    <content type="html">&lt;p&gt;It’s a test.&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;It’s a test.&lt;/p&gt;
-
-    
-    </summary>
-    
-    
-  </entry>
-  
 </feed>
