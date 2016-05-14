@@ -91,7 +91,7 @@
 <meta property="og:description" content="用python写一个豆瓣小组的爬虫（一）这是一篇夹杂着大量私货的“技术贴”。
 豆瓣是一个神奇的网站。我大概是在07年的时候知道有豆瓣这个网站，然后在高考之后有一段时间整天泡在上边，每看完一部电影就上去标记为“看过”，写个短评，乐此不疲。豆瓣fm也是一个我非常喜欢的功能，我曾经最喜欢的事情之一就是一边听着私人电台，一边在阿尔法城逛来逛去（后来阿尔法城关掉了）。再写下去就要写成豆瓣的软文了，哈。不过确">
 <meta property="og:image" content="http://spencerpomme.github.io/images/groupiwgf.png">
-<meta property="og:updated_time" content="2016-05-01T14:38:51.000Z">
+<meta property="og:updated_time" content="2016-05-10T15:26:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用python写一个豆瓣小组的爬虫（一）">
 <meta name="twitter:description" content="用python写一个豆瓣小组的爬虫（一）这是一篇夹杂着大量私货的“技术贴”。
@@ -362,7 +362,7 @@
 <li>抽取信息</li>
 </ol>
 <p>在这里，我用requests做抓取这一步，然后用beautifulsoup做分析这一步。虽然自带的urllib挺好的，但是python2和python3的urllib无法兼容，所以采用一个更不容易出问题的。这里的问题是指人犯错，而不是库有bug😂，蛤蛤。</p>
-<p>至于beautifulsoup，我觉得用着很是省心。除了因为暂时没有必(neng)要(li)自己造轮子外，用纯正则表达式来分析HTML的话，差不多可以拍一部电影叫做<em>Fifty shades of rex[^1]</em>了，但我没有这样的爱好，真的。不过话又说回来，五十度灰的男女主角身材真是好，通过强烈刺激观众大脑的某一区域，似乎成功地阻碍了另一部分区域正常发挥作用，这解释了为什么这部电影的豆瓣评分会远远高于我的预想。这外貌协会（又玛丽苏）的世界。</p>
+<p>至于beautifulsoup，我觉得用着很是省心。除了因为暂时没有必(neng)要(li)自己造轮子外，用纯正则表达式来分析HTML的话，差不多可以拍一部电影叫做<em>Fifty shades of rex</em>了，但我没有这样的爱好，真的。不过话又说回来，五十度灰的男女主角身材真是好，通过强烈刺激观众大脑的某一区域，似乎成功地阻碍了另一部分区域正常发挥作用，这解释了为什么这部电影的豆瓣评分会远远高于我的预想。这外貌协会（又玛丽苏）的世界。</p>
 <p>所以明白了原理，<strong>let’s just shut the f*ck up and write some codes.</strong></p>
 <h4 id="三、首先，你要有一个…"><a href="#三、首先，你要有一个…" class="headerlink" title="三、首先，你要有一个…"></a>三、首先，你要有一个…</h4><p>这个节标题没有任何恶意🐶</p>
 <p>真的，我是指你要有一个<del>女朋友</del>目标小组。比如这个：</p>
@@ -372,7 +372,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment"># code list part 1</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> bs4</span><br><span class="line"></span><br><span class="line"><span class="comment"># url: the target group's url</span></span><br><span class="line">url = <span class="string">"https://www.douban.com/group/needGF/discussion?start=0"</span></span><br><span class="line"><span class="comment"># now use requests to get the page's html file</span></span><br><span class="line">html = requests.get(url)</span><br><span class="line"></span><br><span class="line">print(html)</span><br><span class="line"><span class="comment"># to be continued...</span></span><br></pre></td></tr></table></figure>
 <p>也许你是在idle里写的这几行代码，也许是写在记事本里，总之运行它。你会发现整个网页的源码都print出来了。第一步完成啦，excited.</p>
 <h4 id="三、使用beautiful-soup解析网页"><a href="#三、使用beautiful-soup解析网页" class="headerlink" title="三、使用beautiful soup解析网页"></a>三、使用beautiful soup解析网页</h4><p>接着就是抽取想要的信息。本文只想做一步，就是获取帖子的<strong>标题</strong>，<strong>发帖人</strong>，<strong>回复数</strong>，<strong>最后回复时间</strong>以及<strong>发帖人主页链接</strong>和<strong>帖子链接</strong>。</p>
-<p>然而为什么需要链接呢？依我自己的经验，人有的时候真的会抑制不住好奇心去看看发了<strong>“叔帅还霸道，有钱”</strong>这样子的帖子是何方高富帅，也会想要去围观一下<strong>“楼主女，懂的来”</strong>这样的帖子，检验一下自己<del>懂不懂</del>革命意志是否坚定。开玩笑啦，其实保留链接的目的是为了做更为复杂的爬虫，即让爬虫可以继续顺着链接爬下去，这样才有可能得出所有用户的关系图[^2]。</p>
+<p>然而为什么需要链接呢？依我自己的经验，人有的时候真的会抑制不住好奇心去看看发了<strong>“叔帅还霸道，有钱”</strong>这样子的帖子是何方高富帅，也会想要去围观一下<strong>“楼主女，懂的来”</strong>这样的帖子，检验一下自己<del>懂不懂</del>革命意志是否坚定。开玩笑啦，其实保留链接的目的是为了做更为复杂的爬虫，即让爬虫可以继续顺着链接爬下去，这样才有可能得出所有用户的关系图。</p>
 <p>那么让我们来看看怎么做：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># adjacent to code list part 1</span></span><br><span class="line"><span class="comment"># this is code list part 2</span></span><br><span class="line">soup = bs4.BeautifulSoup(html.text, <span class="string">"lxml"</span>)</span><br><span class="line"><span class="comment"># the data are stored in a &lt;table&gt;</span></span><br><span class="line">table = soup.findAll(<span class="string">"table"</span>, &#123;<span class="string">"class"</span>: <span class="string">"olt"</span>&#125;)</span><br><span class="line"><span class="comment"># to be continued...</span></span><br></pre></td></tr></table></figure>
 <p>这一步，我们把网页源代码转化成了一个bs4.BeautifulSoup object，这样就可以进行后续的信息抽取了。具体的实现方式不是唯一的，事实上我个人感觉bs4这个库可以有很多方式做到同一件事，教条地说这并不很pythonic。</p>
@@ -381,7 +381,6 @@
 <h4 id="四、距离真正可以使用还差几步"><a href="#四、距离真正可以使用还差几步" class="headerlink" title="四、距离真正可以使用还差几步"></a>四、距离真正可以使用还差几步</h4><p>仅仅print出来是不可以接受的，因为一个真正的爬虫还至少需要能够把数据存起来。而且，之前的代码只是爬取了一页，我们还需要在外边套上一层循环。最后，考虑到限制，我们还需要使用代理，或者设置sleep time来慢慢爬，防止被服务器封印掉IP。</p>
 <p>但是我今天累了，劳动节要早点睡。晚安。</p>
 <p>别打我，我其实也没有写完呢。代码见我的GITHUB，或者直接戳这里：<a href="https://github.com/spencerpomme/screwpie" target="_blank" rel="external">screwpie</a></p>
-<p>[^1]: rex is abbreviation for regular expression<br>[^2]: graph here is a algorithmic concept, a kind of data structure</p>
 
       
     </div>
@@ -512,7 +511,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -529,7 +528,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
