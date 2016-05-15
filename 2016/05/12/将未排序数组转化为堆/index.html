@@ -82,20 +82,20 @@
 
 
 
-<meta name="description" content="本文是由学习MIT 6.006和Introduction to algorithms这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。可以理解为heap sort。本文的代码使用C语言。
-一、堆的数组存储方式首先，之所以可以将arra">
+<meta name="description" content="本文是由学习MIT 6.006和Introduction to algorithms这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。本文的代码使用C语言。
+一、堆的数组存储方式首先，之所以可以将array转化成heap，是因为hea">
 <meta property="og:type" content="article">
 <meta property="og:title" content="将未排序数组转化为堆">
 <meta property="og:url" content="http://spencerpomme.github.io/2016/05/12/将未排序数组转化为堆/index.html">
 <meta property="og:site_name" content="品森">
-<meta property="og:description" content="本文是由学习MIT 6.006和Introduction to algorithms这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。可以理解为heap sort。本文的代码使用C语言。
-一、堆的数组存储方式首先，之所以可以将arra">
+<meta property="og:description" content="本文是由学习MIT 6.006和Introduction to algorithms这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。本文的代码使用C语言。
+一、堆的数组存储方式首先，之所以可以将array转化成heap，是因为hea">
 <meta property="og:image" content="http://spencerpomme.github.io/images/heap1.png">
-<meta property="og:updated_time" content="2016-05-14T14:49:42.000Z">
+<meta property="og:updated_time" content="2016-05-15T01:50:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="将未排序数组转化为堆">
-<meta name="twitter:description" content="本文是由学习MIT 6.006和Introduction to algorithms这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。可以理解为heap sort。本文的代码使用C语言。
-一、堆的数组存储方式首先，之所以可以将arra">
+<meta name="twitter:description" content="本文是由学习MIT 6.006和Introduction to algorithms这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。本文的代码使用C语言。
+一、堆的数组存储方式首先，之所以可以将array转化成heap，是因为hea">
 <meta name="twitter:image" content="http://spencerpomme.github.io/images/heap1.png">
 
 
@@ -338,7 +338,7 @@
       
 
       
-        <p>本文是由学习MIT 6.006和<strong>Introduction to algorithms</strong>这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。可以理解为heap sort。本文的代码使用C语言。</p>
+        <p>本文是由学习MIT 6.006和<strong>Introduction to algorithms</strong>这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。本文的代码使用C语言。</p>
 <h3 id="一、堆的数组存储方式"><a href="#一、堆的数组存储方式" class="headerlink" title="一、堆的数组存储方式"></a>一、堆的数组存储方式</h3><p>首先，之所以可以将array转化成heap，是因为heap可以用array来存储。heap在本质上是一棵binary tree，但是由于根据定义，heap同时也是一棵complete binary tree，所以通过array来存储可以通过suffix关系来表示树的parent-child关系，既节省空间又不损失信息。</p>
 <p>假设有一个array A，其中有10个未排序的整数元素：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> A[<span class="number">11</span>] = &#123;<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">45</span>, <span class="number">11</span>, <span class="number">23</span>, <span class="number">9</span>, <span class="number">74</span>, <span class="number">4</span>&#125;;</span><br></pre></td></tr></table></figure>
