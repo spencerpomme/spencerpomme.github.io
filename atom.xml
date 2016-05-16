@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://spencerpomme.github.io/"/>
-  <updated>2016-05-15T01:50:02.000Z</updated>
+  <updated>2016-05-16T07:28:34.000Z</updated>
   <id>http://spencerpomme.github.io/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>此消彼长</title>
+    <link href="http://spencerpomme.github.io/2016/05/15/%E6%AD%A4%E6%B6%88%E5%BD%BC%E9%95%BF/"/>
+    <id>http://spencerpomme.github.io/2016/05/15/此消彼长/</id>
+    <published>2016-05-15T14:40:38.000Z</published>
+    <updated>2016-05-16T07:28:34.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/images/flower.jpg&quot; alt=&quot;一片园艺植物&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我一直很认同“此消彼长”这个道理。&lt;/p&gt;
+&lt;p&gt;高中的时候学理科，物理班。对我来说此消彼长就是能量守恒定律的文艺版说法，很好很简洁。&lt;/p&gt;
+&lt;p&gt;你可以自己能量守恒，也可以跟其他人组成一个系统，系统内能量守候。哦，此消彼长。也许这就是为什么若干年前那么流行所谓的“rp守恒定律”吧：&lt;strong&gt;人们总是无法坦然地接受发生在自己身上的种种不幸或失意，哪怕分明自己就是一切祸乱的始作俑者，也莫名地隐隐期望存在这样一种“守恒”，能够让未来的自己因当下的落魄而获益。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;何其自欺欺人。&lt;/p&gt;
+&lt;p&gt;rp不是这么攒的啊。避免生活中种种不幸的方法有很多种，但是我知道其中必然不包括不断地扑街、指望这是在预支下半辈子的不幸，心有戚戚焉地说几句豁达开朗的空话，然后希望此后可以一帆风顺——哪怕是一段时间也好呢？不好意思，这个真的不是这么玩儿的啊。我作证。&lt;/p&gt;
+&lt;p&gt;消什么，长什么？这个比揪着“此”是哪儿，“彼”是谁要重要得多了。&lt;strong&gt;没有比较就没有伤害&lt;/strong&gt;，做自己家的小孩，让别人家的小孩去上兴趣班吧。代码写得烂又怎样，算法题不会做又如何，实习一直被拒我哭了么？人生不会因此提前终结，这是事实。&lt;/p&gt;
+&lt;p&gt;人生会一直持续下去，但失败也是。只要不去主动改变和总结反思自己的问题，不存在神之转折这种便利的东西，不管前边的奇葩遭遇积累了多少。这点不幸跟人类历史上的平均不幸水平比起来简直是个笑话，就算按照“能量守恒”的规律来看，什么也不去做的人只可能趋向于一个更加不幸的状态。&lt;/p&gt;
+&lt;p&gt;消除自己的愚蠢和不足，增长自己的能力和见识。&lt;strong&gt;这才是真正的此消彼长。&lt;/strong&gt;自身的无知和狭隘是自己最大的敌人。少部分智者的敌人与自己势均力敌，然而大部分人的敌人是个巨人，个别人的甚至是奇行种。任重而道远，任重而道远。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/loser.jpg&quot; alt=&quot;loser&quot;&gt;&lt;/p&gt;
+&lt;p&gt;这是值得终身为之付出努力的伟大事业。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/flower.jpg&quot; alt=&quot;一片园艺植物&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我一直很认同“此消彼长”这个道理。&lt;/p&gt;
+&lt;p&gt;高中的时候学理科，物理班。对我来说此消彼长就是能量守恒定律的文艺版说法，很好很简洁。&lt;/p&gt;
+&lt;p&gt;你可以自己能量守恒，也
+    
+    </summary>
+    
+      <category term="杂谈" scheme="http://spencerpomme.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="心态很重要" scheme="http://spencerpomme.github.io/tags/%E5%BF%83%E6%80%81%E5%BE%88%E9%87%8D%E8%A6%81/"/>
+    
+  </entry>
   
   <entry>
     <title>将未排序数组转化为堆</title>
