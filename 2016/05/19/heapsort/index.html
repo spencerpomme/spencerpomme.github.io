@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="record" />
+  <meta name="keywords" content="algorithm,heap,sort," />
 
 
 
@@ -82,15 +82,37 @@
 
 
 
-<meta name="description" content="看书，做饭，写代码">
-<meta property="og:type" content="website">
-<meta property="og:title" content="品森">
-<meta property="og:url" content="http://spencerpomme.github.io/tags/敏感/index.html">
+<meta name="description" content="本文是之前一篇blog《将未排序数组转化为堆》的后续，本文主要设计到的内容包括：
+
+接着上一篇，分析create_maxheap函数的时间复杂度；
+实现和分析heapsort算法
+分析heapsort的时间复杂度
+
+create_maxheap的时间复杂度分析首先来回顾一下代码：
+123456789void create_maxheap(int array[], int n)&amp;#123;    i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="heapsort">
+<meta property="og:url" content="http://spencerpomme.github.io/2016/05/19/heapsort/index.html">
 <meta property="og:site_name" content="品森">
-<meta property="og:description" content="看书，做饭，写代码">
+<meta property="og:description" content="本文是之前一篇blog《将未排序数组转化为堆》的后续，本文主要设计到的内容包括：
+
+接着上一篇，分析create_maxheap函数的时间复杂度；
+实现和分析heapsort算法
+分析heapsort的时间复杂度
+
+create_maxheap的时间复杂度分析首先来回顾一下代码：
+123456789void create_maxheap(int array[], int n)&amp;#123;    i">
+<meta property="og:updated_time" content="2016-05-19T07:42:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="品森">
-<meta name="twitter:description" content="看书，做饭，写代码">
+<meta name="twitter:title" content="heapsort">
+<meta name="twitter:description" content="本文是之前一篇blog《将未排序数组转化为堆》的后续，本文主要设计到的内容包括：
+
+接着上一篇，分析create_maxheap函数的时间复杂度；
+实现和分析heapsort算法
+分析heapsort的时间复杂度
+
+create_maxheap的时间复杂度分析首先来回顾一下代码：
+123456789void create_maxheap(int array[], int n)&amp;#123;    i">
 
 
 
@@ -108,7 +130,7 @@
   };
 </script>
 
-  <title> 标签: 敏感 | 品森 </title>
+  <title> heapsort | 品森 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -138,7 +160,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,46 +258,186 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        敏感
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                heapsort
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-19T12:29:59+08:00" content="2016-05-19">
+              2016-05-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/19/heapsort/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/19/heapsort/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/19/heapsort/" class="leancloud_visitors" data-flag-title="heapsort">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>本文是之前一篇blog<strong>《将未排序数组转化为堆》</strong>的后续，本文主要设计到的内容包括：</p>
+<ol>
+<li>接着上一篇，分析create_maxheap函数的时间复杂度；</li>
+<li>实现和分析heapsort算法</li>
+<li>分析heapsort的时间复杂度</li>
+</ol>
+<h3 id="create-maxheap的时间复杂度分析"><a href="#create-maxheap的时间复杂度分析" class="headerlink" title="create_maxheap的时间复杂度分析"></a>create_maxheap的时间复杂度分析</h3><p>首先来回顾一下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create_maxheap</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = n / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        max_heapify2(<span class="built_in">array</span>, n, i);</span><br><span class="line">        i--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一眼看起来，这个函数的时间复杂度应该是O(n <em> O(max_heapify2))，而max_heapify的时间复杂度在之前的blog种已经分析过了，是O(lg n)。所以至少可以得到一个大致的时间复杂度应该是o(n</em>lg n)。（O表示tight upper bound，而o则不是）。然而我们可以做得更加精确一些。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+    
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/05/06/一颗敏感的小心脏/" itemprop="url">
-              
-                <span itemprop="name">一颗敏感的小心脏</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-06T22:20:38+08:00"
-              content="2016-05-06" >
-          05-06
-        </time>
-      </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag">#algorithm</a>
+          
+            <a href="/tags/heap/" rel="tag">#heap</a>
+          
+            <a href="/tags/sort/" rel="tag">#sort</a>
+          
+        </div>
+      
 
-    </header>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/15/此消彼长/" rel="next" title="此消彼长">
+                <i class="fa fa-chevron-left"></i> 此消彼长
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/19/heapsort/"
+     data-title="heapsort"
+     data-content=""
+     data-url="http://spencerpomme.github.io/2016/05/19/heapsort/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
@@ -283,6 +445,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/19/heapsort/"
+           data-title="heapsort" data-url="http://spencerpomme.github.io/2016/05/19/heapsort/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -302,8 +472,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -395,6 +574,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-maxheap的时间复杂度分析"><span class="nav-number">1.</span> <span class="nav-text">create_maxheap的时间复杂度分析</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -499,6 +689,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

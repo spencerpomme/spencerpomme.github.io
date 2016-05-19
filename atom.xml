@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://spencerpomme.github.io/"/>
-  <updated>2016-05-17T13:49:16.000Z</updated>
+  <updated>2016-05-19T07:42:42.000Z</updated>
   <id>http://spencerpomme.github.io/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>heapsort</title>
+    <link href="http://spencerpomme.github.io/2016/05/19/heapsort/"/>
+    <id>http://spencerpomme.github.io/2016/05/19/heapsort/</id>
+    <published>2016-05-19T04:29:59.000Z</published>
+    <updated>2016-05-19T07:42:42.000Z</updated>
+    
+    <content type="html">&lt;p&gt;本文是之前一篇blog&lt;strong&gt;《将未排序数组转化为堆》&lt;/strong&gt;的后续，本文主要设计到的内容包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;接着上一篇，分析create_maxheap函数的时间复杂度；&lt;/li&gt;
+&lt;li&gt;实现和分析heapsort算法&lt;/li&gt;
+&lt;li&gt;分析heapsort的时间复杂度&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;create-maxheap的时间复杂度分析&quot;&gt;&lt;a href=&quot;#create-maxheap的时间复杂度分析&quot; class=&quot;headerlink&quot; title=&quot;create_maxheap的时间复杂度分析&quot;&gt;&lt;/a&gt;create_maxheap的时间复杂度分析&lt;/h3&gt;&lt;p&gt;首先来回顾一下代码：&lt;/p&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;create_maxheap&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;array&lt;/span&gt;[], &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = n / &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (i &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        max_heapify2(&lt;span class=&quot;built_in&quot;&gt;array&lt;/span&gt;, n, i);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        i--;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;第一眼看起来，这个函数的时间复杂度应该是O(n &lt;em&gt; O(max_heapify2))，而max_heapify的时间复杂度在之前的blog种已经分析过了，是O(lg n)。所以至少可以得到一个大致的时间复杂度应该是o(n&lt;/em&gt;lg n)。（O表示tight upper bound，而o则不是）。然而我们可以做得更加精确一些。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文是之前一篇blog&lt;strong&gt;《将未排序数组转化为堆》&lt;/strong&gt;的后续，本文主要设计到的内容包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;接着上一篇，分析create_maxheap函数的时间复杂度；&lt;/li&gt;
+&lt;li&gt;实现和分析heapsort算法&lt;/li&gt;
+&lt;li&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://spencerpomme.github.io/categories/CS/"/>
+    
+    
+      <category term="algorithm" scheme="http://spencerpomme.github.io/tags/algorithm/"/>
+    
+      <category term="heap" scheme="http://spencerpomme.github.io/tags/heap/"/>
+    
+      <category term="sort" scheme="http://spencerpomme.github.io/tags/sort/"/>
+    
+  </entry>
   
   <entry>
     <title>此消彼长</title>
