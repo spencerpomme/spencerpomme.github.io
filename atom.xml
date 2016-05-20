@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://spencerpomme.github.io/"/>
-  <updated>2016-05-20T14:29:24.000Z</updated>
+  <updated>2016-05-20T17:23:23.000Z</updated>
   <id>http://spencerpomme.github.io/</id>
   
   <author>
@@ -17,36 +17,83 @@
   
   <entry>
     <title>heapsort</title>
-    <link href="http://spencerpomme.github.io/2016/05/19/heapsort/"/>
-    <id>http://spencerpomme.github.io/2016/05/19/heapsort/</id>
-    <published>2016-05-19T04:29:59.000Z</published>
-    <updated>2016-05-20T14:29:24.000Z</updated>
+    <link href="http://spencerpomme.github.io/2016/05/20/heapsort/"/>
+    <id>http://spencerpomme.github.io/2016/05/20/heapsort/</id>
+    <published>2016-05-20T14:29:59.000Z</published>
+    <updated>2016-05-20T17:23:23.000Z</updated>
     
-    <content type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;之前一篇blog&lt;strong&gt;《将未排序数组转化为堆》&lt;/strong&gt;讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：&lt;/p&gt;
-&lt;ol&gt;
+    <content type="html">&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
+&lt;p&gt;之前一篇blog&lt;strong&gt;《将未排序数组转化为堆》&lt;/strong&gt;讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：&lt;/p&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
 &lt;li&gt;接着上一篇，分析create_maxheap函数的时间复杂度；&lt;/li&gt;
 &lt;li&gt;实现heapsort算法&lt;/li&gt;
 &lt;li&gt;分析heapsort的时间复杂度&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;em&gt;参考书目：CLRS 6.1-6.4&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;可以预见本文将不得不利用一点数学推导来进行分析，太可怕了🌚&lt;/p&gt;
-&lt;h3 id=&quot;create-maxheap的时间复杂度分析&quot;&gt;&lt;a href=&quot;#create-maxheap的时间复杂度分析&quot; class=&quot;headerlink&quot; title=&quot;create_maxheap的时间复杂度分析&quot;&gt;&lt;/a&gt;create_maxheap的时间复杂度分析&lt;/h3&gt;&lt;h4 id=&quot;粗略分析：loose-bound&quot;&gt;&lt;a href=&quot;#粗略分析：loose-bound&quot; class=&quot;headerlink&quot; title=&quot;粗略分析：loose bound&quot;&gt;&lt;/a&gt;粗略分析：loose bound&lt;/h4&gt;&lt;p&gt;首先来回顾一下代码：&lt;/p&gt;
+&lt;h3 id=&quot;create_maxheap的时间复杂度分析&quot;&gt;create_maxheap的时间复杂度分析&lt;/h3&gt;
+&lt;h4 id=&quot;粗略分析loose-bound&quot;&gt;粗略分析：loose bound&lt;/h4&gt;
+&lt;p&gt;首先来回顾一下代码：&lt;/p&gt;
 &lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;create_maxheap&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;array&lt;/span&gt;[], &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = n / &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (i &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        max_heapify2(&lt;span class=&quot;built_in&quot;&gt;array&lt;/span&gt;, n, i);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        i--;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;第一眼看起来，这个函数的时间复杂度应该是$O(n\cdot O(max\ heapify))$，而max_heapify的时间复杂度在之前的blog中已经分析过了，是O(lg n)。所以至少可以得到一个大致的时间复杂度应该是$o(n\cdot \lg n)$。（O表示tight upper bound，而o则不是）。然而我们可以做得更加精确一些。&lt;/p&gt;
-&lt;p&gt;我们已经知道，对于一个有n个节点的heap来说，其中某个节点调用max_heapify的时间复杂度为O(h)，h为该节点的height。&lt;strong&gt;因此，每一层调用max_heapify执行的工作量是不一样的。&lt;/strong&gt;譬如在height=1的那一层（即leaf节点层的上一层）调用max_heapify的步骤为&lt;code&gt;1c&lt;/code&gt;，而在root的调用时间则是$\lg n \cdot c$，c是常数。&lt;/p&gt;
+&lt;p&gt;第一眼看起来，这个函数的时间复杂度应该是&lt;code&gt;O(n * O(max_heapify2))&lt;/code&gt;，而max_heapify的时间复杂度在之前的blog中已经分析过了，是O(lg n)。所以至少可以得到一个大致的时间复杂度应该是&lt;code&gt;o(n*lg n)&lt;/code&gt;。（O表示tight upper bound，而o则不是）。然而我们可以做得更加精确一些。&lt;/p&gt;
+&lt;p&gt;我们已经知道，对于一个有n个节点的heap来说，其中某个节点调用max_heapify的时间复杂度为O(h)，h为该节点的height。&lt;strong&gt;因此，每一层调用max_heapify执行的工作量是不一样的。&lt;/strong&gt;譬如在height=1的那一层（即leaf节点层的上一层）调用max_heapify的步骤为&lt;code&gt;1c&lt;/code&gt;，而在root的调用时间则是&lt;code&gt;lg(n)c&lt;/code&gt;，c是常数。&lt;/p&gt;
 &lt;p&gt;所以为了知道总的时间，还需要知道&lt;strong&gt;每一层的节点数与height的关系&lt;/strong&gt;。&lt;/p&gt;
-&lt;h4 id=&quot;每一层的节点数与height的关系&quot;&gt;&lt;a href=&quot;#每一层的节点数与height的关系&quot; class=&quot;headerlink&quot; title=&quot;每一层的节点数与height的关系&quot;&gt;&lt;/a&gt;每一层的节点数与height的关系&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;: 推导时，假设heap构成了一棵full binary tree。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/fullbt.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解释&lt;/strong&gt;: 这是为了求得每一层最多时候的情况而规定的，同时当n趋近于$\infty$的时候，leaf层是否满足full binary tree的定义对得到的规律而言无影响，但是会大大简化推导的过程。&lt;/p&gt;
-&lt;p&gt;对于一棵节点总数为n的full binary tree来说，其每一层的节点数是一个$r=2$的等比数列，所以节点数之和与深度depth的关系为：&lt;br&gt;$$&lt;br&gt;\begin{eqnarray&lt;em&gt;}&lt;br&gt;\large n&lt;br&gt;&amp;amp;=&amp;amp;\sum_{d=1}^{\lg n} r^d = \frac{1-r^d}{1-r} \ \ \ \ \ (r\neq1)\\&lt;br&gt;&amp;amp;&amp;amp;带入r=2, 有:\\&lt;br&gt;&amp;amp;=&amp;amp; \frac{1-2^d}{1-2}\&lt;br&gt;&amp;amp;=&amp;amp; 2^d-1&lt;br&gt;\end{eqnarray&lt;/em&gt;}&lt;br&gt;$$&lt;br&gt;其中，d为该层的节点的深度(depth)。对于一棵full binary tree我们知道，节点的depth和height存在关系：$d+h=\lg n$，其中n为总的节点数，h为height。所以(A)式可以改写为：&lt;br&gt;$$&lt;br&gt;\large n \normalsize = 2^{\lg n - h} - 1\ \ \ \ \&lt;br&gt;$$&lt;br&gt;现在来求$h = h&lt;em&gt;{0}$时，该层有多少个节点。方法很简单，只需要用从顶点到$h&lt;/em&gt;{0}$层的总节点数减去从顶点到$h&lt;em&gt;{0} +1$层的总节点数即可算出：&lt;br&gt;$$&lt;br&gt;\begin{eqnarray*}&lt;br&gt;S&lt;/em&gt;{0}&lt;br&gt;&amp;amp;=&amp;amp;(2^{\lg n - h&lt;em&gt;{0}} - 1) - (2^{\lg n - (h&lt;/em&gt;{0}+1)} -1)\&lt;br&gt;&amp;amp;=&amp;amp;\frac{2^{\lg n}}{2^{h&lt;em&gt;{0}+1}}\&lt;br&gt;&amp;amp;=&amp;amp;\frac{n}{2^{h&lt;/em&gt;{0}+1}}\&lt;br&gt;\end{eqnarray*}&lt;br&gt;$$&lt;br&gt;由此，可以证明每一层最多含有$\lceil\frac{n}{2^{h+1}}\rceil$个节点。（这个证明是CLRS中的一道习题）&lt;/p&gt;
-&lt;h4 id=&quot;推导create-maxheap的时间复杂度&quot;&gt;&lt;a href=&quot;#推导create-maxheap的时间复杂度&quot; class=&quot;headerlink&quot; title=&quot;推导create_maxheap的时间复杂度&quot;&gt;&lt;/a&gt;推导create_maxheap的时间复杂度&lt;/h4&gt;&lt;p&gt;证明了对于一个heap来说每一层最多有$\lceil\frac{n}{2^{h+1}}\rceil$个节点之后，就可以进一步推导create_maxheap的时间复杂度了。有：&lt;br&gt;$$&lt;br&gt;T(h) = \frac{n}{2^{1+1}}(1c) +  \frac{n}{2^{2+1}}(2c) + \cdots +  \frac{n}{2^{\lg(n)}}(\lg(\frac{n}{2})\cdot c) +  \frac{n}{2^{\lg(n)+1}}(\lg(n)\cdot c) \ \ \ \ \ (a)&lt;br&gt;$$&lt;br&gt;其中，$h\in[1,\lg(n)]$闭区间。这个很容易理解，当h也就是height为1的时候，就是leaf层的上一层；当h为$\lg(n)$的时候，就是root节点了。(a)式的每一项由两个部分组成，第一部分为层节点数，第二部分为每个该层节点需要做的work，c为一个常数。&lt;/p&gt;
-&lt;p&gt;对于(a)式提取公因式$\frac{cn}{2^{1+1}}$，可以得到：&lt;br&gt;$$&lt;br&gt;T(h) = \frac{cn}{4}\cdot (\normalsize 1 + \frac{2}{2} + \frac{3}{4} + \frac{4}{8} + \frac{5}{16} + \cdots + \frac{h}{2^{h-1}}) \ \ \ \ \  (b)&lt;br&gt;$$&lt;br&gt;即：&lt;br&gt;$$&lt;br&gt;T(h) = \frac{cn}{4}\cdot (1 + \sum&lt;em&gt;{h=1}^{\lg(n)} \frac{h}{2^{h-1}}) \ \ \ \ \  (c)&lt;br&gt;$$&lt;br&gt;容易发现，$\sum&lt;/em&gt;{h=1}^{\lg(n)} \frac{h}{2^{h-1}}$这一项可以拆解为等差数列和等比数列的商，进一步简化可以写为$\sum&lt;em&gt;{h=0}^{\lg(n)} \frac{h}{2^{h}}$，然后当：&lt;br&gt;$$&lt;br&gt;\sum&lt;/em&gt;{h=0}^{\infty} \frac{h}{2^{h}} \ \ \ \ \ (d)&lt;br&gt;$$&lt;br&gt;(d)式满足公式：$\sum&lt;em&gt;{k=0}^{\infty} kx^k = \frac{x}{(1-x)^2}$（&lt;strong&gt;公式证明可见维基百科&lt;/strong&gt;），当且仅当$\vert k \vert &amp;lt; 1$时成立。这里$k = \frac{1}{2}$，因此(d)式收敛于：&lt;br&gt;$$&lt;br&gt;\sum&lt;/em&gt;{h=0}^{\infty} \frac{h}{2^h} = \frac{1/2}{(1- 1/2)^2} = 2 \ \ \ \ \ (e)&lt;br&gt;$$&lt;/p&gt;
-&lt;p&gt;于是结合(e), (c)两式有：&lt;br&gt;$$&lt;br&gt;\begin {eqnarray&lt;em&gt;}&lt;br&gt; \large O(\normalsize \frac{cn}{4}\cdot(1+\sum&lt;em&gt;{h=1}^{\lg(n)} \frac{h}{2^{h-1}})\large)\normalsize&lt;br&gt; &amp;amp;=&amp;amp;\large O(\normalsize\frac{cn}{4}\cdot(1+\sum&lt;/em&gt;{h=0}^{\infty} \frac{h}{2^{h}})\large) \&lt;br&gt; &amp;amp;=&amp;amp;\large O(\normalsize\frac{cn}{4}\cdot(1+2)\large)\ \&lt;br&gt; &amp;amp;=&amp;amp;\large O(\normalsize\frac{3cn}{4}\large)\ \&lt;br&gt; &amp;amp;=&amp;amp;\large O(\normalsize n \large)&lt;br&gt;\end {eqnarray&lt;/em&gt;}&lt;br&gt;$$&lt;br&gt;至此，证明完毕。可知create_maxheap的时间复杂度是线性的。&lt;/p&gt;
-&lt;h3 id=&quot;heapsort算法&quot;&gt;&lt;a href=&quot;#heapsort算法&quot; class=&quot;headerlink&quot; title=&quot;heapsort算法&quot;&gt;&lt;/a&gt;heapsort算法&lt;/h3&gt;&lt;p&gt;同样，这个部分也分为两个子内容，首先实现heapsort算法，然后分析其时间复杂度。&lt;/p&gt;
-&lt;h4 id=&quot;算法实现&quot;&gt;&lt;a href=&quot;#算法实现&quot; class=&quot;headerlink&quot; title=&quot;算法实现&quot;&gt;&lt;/a&gt;算法实现&lt;/h4&gt;&lt;p&gt;在之前的&lt;code&gt;max_heapify&lt;/code&gt;函数和&lt;code&gt;create_maxheap&lt;/code&gt;函数的基础上，实现heapsort算法就比较简单了。用自然语言描述的话如下：&lt;/p&gt;
-&lt;ol&gt;
+&lt;h4 id=&quot;每一层的节点数与height的关系&quot;&gt;每一层的节点数与height的关系&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;: 推导时，假设heap构成了一棵full binary tree。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解释&lt;/strong&gt;: 这是为了求得每一层最多时候的情况而规定的，同时当n趋近于&lt;span class=&quot;math inline&quot;&gt;\(\infty\)&lt;/span&gt;的时候，leaf层是否满足full binary tree的定义对得到的规律而言无影响，但是会大大简化推导的过程。&lt;/p&gt;
+&lt;p&gt;对于一棵节点总数为n的full binary tree来说，其每一层的节点数是一个&lt;span class=&quot;math inline&quot;&gt;\(r=2\)&lt;/span&gt;的等比数列，所以节点数之和与深度depth的关系为： 
+$$
+\begin{eqnarray*}
+\large n
+&amp;=&amp;\sum_{d=1}^{\lg n} r^d = \frac{1-r^d}{1-r} \ \ \ \ \ (r\neq1)\\\\
+&amp;&amp;带入r=2, 有:\\\\
+&amp;=&amp; \frac{1-2^d}{1-2}\\
+&amp;=&amp; 2^d-1
+\end{eqnarray*}
+$$
+ 其中，d为该层的节点的深度(depth)。对于一棵full binary tree我们知道，节点的depth和height存在关系：&lt;span class=&quot;math inline&quot;&gt;\(d+h=\lg n\)&lt;/span&gt;，其中n为总的节点数，h为height。所以(A)式可以改写为： 
+$$
+\large n \normalsize = 2^{\lg n - h} - 1\ \ \ \ \
+$$
+ 现在来求&lt;span class=&quot;math inline&quot;&gt;\(h = h_{0}\)&lt;/span&gt;时，该层有多少个节点。方法很简单，只需要用从顶点到&lt;span class=&quot;math inline&quot;&gt;\(h_{0}\)&lt;/span&gt;层的总节点数减去从顶点到&lt;span class=&quot;math inline&quot;&gt;\(h_{0} +1\)&lt;/span&gt;层的总节点数即可算出： 
+$$
+\begin{eqnarray*}
+S_{0}
+&amp;=&amp;(2^{\lg n - h_{0}} - 1) - (2^{\lg n - (h_{0}+1)} -1)\\
+&amp;=&amp;\frac{2^{\lg n}}{2^{h_{0}+1}}\\
+&amp;=&amp;\frac{n}{2^{h_{0}+1}}\\
+\end{eqnarray*}
+$$
+ 由此，可以证明每一层最多含有&lt;span class=&quot;math inline&quot;&gt;\(\lceil\frac{n}{2^{h+1}}\rceil\)&lt;/span&gt;个节点。（这个证明是CLRS中的一道习题）&lt;/p&gt;
+&lt;h4 id=&quot;推导create_maxheap的时间复杂度&quot;&gt;推导create_maxheap的时间复杂度&lt;/h4&gt;
+&lt;p&gt;证明了对于一个heap来说每一层最多有&lt;span class=&quot;math inline&quot;&gt;\(\lceil\frac{n}{2^{h+1}}\rceil\)&lt;/span&gt;个节点之后，就可以进一步推导create_maxheap的时间复杂度了。有： &lt;span class=&quot;math display&quot;&gt;\[
+T(h) = \frac{n}{2^{1+1}}(1c) +  \frac{n}{2^{2+1}}(2c) + \cdots +  \frac{n}{2^{\lg(n)}}(\lg(\frac{n}{2})\cdot c) +  \frac{n}{2^{\lg(n)+1}}(\lg(n)\cdot c) \ \ \ \ \ (a)
+\]&lt;/span&gt; 其中，&lt;span class=&quot;math inline&quot;&gt;\(h\in[1,\lg(n)]\)&lt;/span&gt;闭区间。这个很容易理解，当h也就是height为1的时候，就是leaf层的上一层；当h为&lt;span class=&quot;math inline&quot;&gt;\(\lg(n)\)&lt;/span&gt;的时候，就是root节点了。(a)式的每一项由两个部分组成，第一部分为层节点数，第二部分为每个该层节点需要做的work，c为一个常数。&lt;/p&gt;
+&lt;p&gt;对于(a)式提取公因式&lt;span class=&quot;math inline&quot;&gt;\(\frac{cn}{2^{1+1}}\)&lt;/span&gt;，可以得到： &lt;span class=&quot;math display&quot;&gt;\[
+T(h) = \frac{cn}{4}\cdot (\normalsize 1 + \frac{2}{2} + \frac{3}{4} + \frac{4}{8} + \frac{5}{16} + \cdots + \frac{h}{2^{h-1}}) \ \ \ \ \  (b)
+\]&lt;/span&gt; 即： &lt;span class=&quot;math display&quot;&gt;\[
+T(h) = \frac{cn}{4}\cdot (1 + \sum_{h=1}^{\lg(n)} \frac{h}{2^{h-1}}) \ \ \ \ \  (c)
+\]&lt;/span&gt; 容易发现，&lt;span class=&quot;math inline&quot;&gt;\(\sum_{h=1}^{\lg(n)} \frac{h}{2^{h-1}}\)&lt;/span&gt;这一项可以拆解为等差数列和等比数列的商，进一步简化可以写为&lt;span class=&quot;math inline&quot;&gt;\(\sum_{h=0}^{\lg(n)} \frac{h}{2^{h}}\)&lt;/span&gt;，然后当： &lt;span class=&quot;math display&quot;&gt;\[
+\sum_{h=0}^{\infty} \frac{h}{2^{h}} \ \ \ \ \ (d)
+\]&lt;/span&gt; (d)式满足公式：&lt;span class=&quot;math inline&quot;&gt;\(\sum_{k=0}^{\infty} kx^k = \frac{x}{(1-x)^2}\)&lt;/span&gt;（&lt;strong&gt;公式证明可见维基百科&lt;/strong&gt;），当且仅当&lt;span class=&quot;math inline&quot;&gt;\(\vert k \vert &amp;lt; 1\)&lt;/span&gt;时成立。这里&lt;span class=&quot;math inline&quot;&gt;\(k = \frac{1}{2}\)&lt;/span&gt;，因此(d)式收敛于： &lt;span class=&quot;math display&quot;&gt;\[
+\sum_{h=0}^{\infty} \frac{h}{2^h} = \frac{1/2}{(1- 1/2)^2} = 2 \ \ \ \ \ (e)
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;于是结合(e), (c)两式有： &lt;span class=&quot;math display&quot;&gt;\[
+\begin {eqnarray*}
+ \large O(\normalsize \frac{cn}{4}\cdot(1+\sum_{h=1}^{\lg(n)} \frac{h}{2^{h-1}})\large)\normalsize
+ &amp;amp;=&amp;amp;\large O(\normalsize\frac{cn}{4}\cdot(1+\sum_{h=0}^{\infty} \frac{h}{2^{h}})\large) \\
+ &amp;amp;=&amp;amp;\large O(\normalsize\frac{cn}{4}\cdot(1+2)\large)\\ \\
+ &amp;amp;=&amp;amp;\large O(\normalsize\frac{3cn}{4}\large)\\ \\
+ &amp;amp;=&amp;amp;\large O(\normalsize n \large)
+\end {eqnarray*}
+\]&lt;/span&gt; 至此，证明完毕。可知create_maxheap的时间复杂度是线性的。&lt;/p&gt;
+&lt;h3 id=&quot;heapsort算法&quot;&gt;heapsort算法&lt;/h3&gt;
+&lt;p&gt;同样，这个部分也分为两个子内容，首先实现heapsort算法，然后分析其时间复杂度。&lt;/p&gt;
+&lt;h4 id=&quot;算法实现&quot;&gt;算法实现&lt;/h4&gt;
+&lt;p&gt;在之前的&lt;code&gt;max_heapify&lt;/code&gt;函数和&lt;code&gt;create_maxheap&lt;/code&gt;函数的基础上，实现heapsort算法就比较简单了。用自然语言描述的话如下：&lt;/p&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
 &lt;li&gt;对一个无序array调用&lt;code&gt;create_maxheap&lt;/code&gt;函数，将其转化为一个max heap&lt;/li&gt;
-&lt;li&gt;找到array中的最大元素，即array[1]  (根据定义max heap的root上的元素是整个array中最大的)&lt;/li&gt;
+&lt;li&gt;找到array中的最大元素，即array[1] (根据定义max heap的root上的元素是整个array中最大的)&lt;/li&gt;
 &lt;li&gt;交换array[1]和最后一个元素，这样最大的元素到了array的最后&lt;/li&gt;
 &lt;li&gt;通过将array的长度减小1来把最后一个元素丢出array&lt;/li&gt;
 &lt;li&gt;对缩小长度后的array从第一个元素（亦即heap root）调用&lt;code&gt;max_heapify&lt;/code&gt;函数&lt;/li&gt;
@@ -55,20 +102,27 @@
 &lt;p&gt;经过这个过程之后，原无序array中的元素就会以非递减的顺序排列。&lt;strong&gt;其本质上就是将在root位置的当前最大元素和当前最后一个元素交换位置，然后再重构整个heap使得缩小长度by 1的那个array再次满足max heap的定义。&lt;/strong&gt;这样就实现了排序的目的。代码如下：&lt;/p&gt;
 &lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;heapsort&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;array&lt;/span&gt;[], &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;/* n is the total nodes in the heap&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     * i is the start node to call this function&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     * n is also the last suffix of array, though total length of array&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     is n + 1 (first element of the array is not used.)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    create_maxheap(&lt;span class=&quot;built_in&quot;&gt;array&lt;/span&gt;, n);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = n; i &amp;gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; i--)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; temp;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        SWAP(&lt;span class=&quot;built_in&quot;&gt;array&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;], &lt;span class=&quot;built_in&quot;&gt;array&lt;/span&gt;[i], temp);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//printf(&quot;i: %d -&amp;gt; %-5d&quot;, i, array[i]);&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//display(array, 11);&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        max_heapify2(&lt;span class=&quot;built_in&quot;&gt;array&lt;/span&gt;, i&lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;// max_heapify1 ok but max_heapify2 bug&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//printf(&quot;             &quot;);&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//display(array, 11);&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//printf(&quot;\n&quot;);&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/* decrement array size by 1, the biggest sorted item is put there&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        so that when calls max_heapify from root, the sorted part remain&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        untouched. */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;如果想要了解是如何通过一次次循环进行排序的，可以取消单行注释，对trace through整个过程有一定的帮助。&lt;/p&gt;
-&lt;h4 id=&quot;heapsort算法的时间复杂度分析&quot;&gt;&lt;a href=&quot;#heapsort算法的时间复杂度分析&quot; class=&quot;headerlink&quot; title=&quot;heapsort算法的时间复杂度分析&quot;&gt;&lt;/a&gt;heapsort算法的时间复杂度分析&lt;/h4&gt;&lt;p&gt;分析heapsort的算法时间复杂度，需要看起算法每一步的时间复杂度。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;$O(n)$&lt;/li&gt;
-&lt;li&gt;一次循环需要$O(1)$， 总共要循环 $n-1$ 次，因此是$O(n)$&lt;/li&gt;
-&lt;li&gt;一次循环需要$O(1)$， 总共要循环 $n-1$ 次，因此是$O(n)$&lt;/li&gt;
-&lt;li&gt;一次循环需要$O(1)$， 总共要循环 $n-1$ 次，因此是$O(n)$&lt;/li&gt;
-&lt;li&gt;一次循环需要$O(\lg n)$， 总共要循环 $n-1$ 次，因此是$O(n\cdot \lg n)$&lt;/li&gt;
+&lt;h4 id=&quot;heapsort算法的时间复杂度分析&quot;&gt;heapsort算法的时间复杂度分析&lt;/h4&gt;
+&lt;p&gt;分析heapsort的算法时间复杂度，需要看起算法每一步的时间复杂度。&lt;/p&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
+&lt;li&gt;&lt;span class=&quot;math inline&quot;&gt;\(O(n)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;一次循环需要&lt;span class=&quot;math inline&quot;&gt;\(O(1)\)&lt;/span&gt;， 总共要循环 &lt;span class=&quot;math inline&quot;&gt;\(n-1\)&lt;/span&gt; 次，因此是&lt;span class=&quot;math inline&quot;&gt;\(O(n)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;一次循环需要&lt;span class=&quot;math inline&quot;&gt;\(O(1)\)&lt;/span&gt;， 总共要循环 &lt;span class=&quot;math inline&quot;&gt;\(n-1\)&lt;/span&gt; 次，因此是&lt;span class=&quot;math inline&quot;&gt;\(O(n)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;一次循环需要&lt;span class=&quot;math inline&quot;&gt;\(O(1)\)&lt;/span&gt;， 总共要循环 &lt;span class=&quot;math inline&quot;&gt;\(n-1\)&lt;/span&gt; 次，因此是&lt;span class=&quot;math inline&quot;&gt;\(O(n)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;一次循环需要&lt;span class=&quot;math inline&quot;&gt;\(O(\lg n)\)&lt;/span&gt;， 总共要循环 &lt;span class=&quot;math inline&quot;&gt;\(n-1\)&lt;/span&gt; 次，因此是&lt;span class=&quot;math inline&quot;&gt;\(O(n\cdot \lg n)\)&lt;/span&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;所以heapsort算法的时间复杂度为$O(n\cdot \lg n)$，且易知空间复杂度为$O(n)$，即in place。&lt;/p&gt;
+&lt;p&gt;所以heapsort算法的时间复杂度为&lt;span class=&quot;math inline&quot;&gt;\(O(n\cdot \lg n)\)&lt;/span&gt;，且易知空间复杂度为&lt;span class=&quot;math inline&quot;&gt;\(O(n)\)&lt;/span&gt;，即in place。&lt;/p&gt;
+&lt;h3 id=&quot;后记&quot;&gt;后记&lt;/h3&gt;
+&lt;p&gt;本文写作的时候又遇到了一个坑，就是Latex和markdown的语法冲突问题。各方查阅了很久，终于选择了用:&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;% raw %&amp;#125; ... &amp;#123;% endraw %&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这对tag将所有包含Latex的地方包裹起来的简单粗暴方法。原因只有一个，就是我只是偶尔才写一点数学公式而已，临时性的策略就足够了😂&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;之前一篇blog&lt;strong&gt;《将未排序数组转化为堆》&lt;/strong&gt;讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉
+      &lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
+&lt;p&gt;之前一篇blog&lt;strong&gt;《将未排序数组转化为堆》&lt;/strong&gt;讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：&lt;/p&gt;
+&lt;ol style=&quot;list-style-type: decima
     
     </summary>
     

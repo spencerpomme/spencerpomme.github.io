@@ -82,7 +82,8 @@
 
 
 
-<meta name="description" content="前言之前一篇blog《将未排序数组转化为堆》讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：
+<meta name="description" content="前言
+之前一篇blog《将未排序数组转化为堆》讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：
 
 接着上一篇，分析create_maxheap函数的时间复杂度；
 实现heapsort算法
@@ -90,12 +91,13 @@
 
 参考书目：CLRS 6.1-6.4
 可以预见本文将不得不利用一点数学推导来进行分析，太可怕了🌚
-create_maxheap的时间复杂度分析粗">
+create_maxheap的时间复杂度分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="heapsort">
-<meta property="og:url" content="http://spencerpomme.github.io/2016/05/19/heapsort/index.html">
+<meta property="og:url" content="http://spencerpomme.github.io/2016/05/20/heapsort/index.html">
 <meta property="og:site_name" content="品森">
-<meta property="og:description" content="前言之前一篇blog《将未排序数组转化为堆》讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：
+<meta property="og:description" content="前言
+之前一篇blog《将未排序数组转化为堆》讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：
 
 接着上一篇，分析create_maxheap函数的时间复杂度；
 实现heapsort算法
@@ -103,12 +105,12 @@ create_maxheap的时间复杂度分析粗">
 
 参考书目：CLRS 6.1-6.4
 可以预见本文将不得不利用一点数学推导来进行分析，太可怕了🌚
-create_maxheap的时间复杂度分析粗">
-<meta property="og:image" content="http://spencerpomme.github.io/images/fullbt.png">
-<meta property="og:updated_time" content="2016-05-20T14:29:24.000Z">
+create_maxheap的时间复杂度分析">
+<meta property="og:updated_time" content="2016-05-20T17:23:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="heapsort">
-<meta name="twitter:description" content="前言之前一篇blog《将未排序数组转化为堆》讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：
+<meta name="twitter:description" content="前言
+之前一篇blog《将未排序数组转化为堆》讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：
 
 接着上一篇，分析create_maxheap函数的时间复杂度；
 实现heapsort算法
@@ -116,8 +118,7 @@ create_maxheap的时间复杂度分析粗">
 
 参考书目：CLRS 6.1-6.4
 可以预见本文将不得不利用一点数学推导来进行分析，太可怕了🌚
-create_maxheap的时间复杂度分析粗">
-<meta name="twitter:image" content="http://spencerpomme.github.io/images/fullbt.png">
+create_maxheap的时间复杂度分析">
 
 
 
@@ -296,8 +297,8 @@ create_maxheap的时间复杂度分析粗">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-19T12:29:59+08:00" content="2016-05-19">
-              2016-05-19
+            <time itemprop="dateCreated" datetime="2016-05-20T22:29:59+08:00" content="2016-05-20">
+              2016-05-20
             </time>
           </span>
 
@@ -326,8 +327,8 @@ create_maxheap的时间复杂度分析粗">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/19/heapsort/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/19/heapsort/" itemprop="commentsCount"></span>
+                <a href="/2016/05/20/heapsort/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/20/heapsort/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -337,7 +338,7 @@ create_maxheap的时间复杂度分析粗">
 
           
           
-             <span id="/2016/05/19/heapsort/" class="leancloud_visitors" data-flag-title="heapsort">
+             <span id="/2016/05/20/heapsort/" class="leancloud_visitors" data-flag-title="heapsort">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -359,31 +360,78 @@ create_maxheap的时间复杂度分析粗">
       
 
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前一篇blog<strong>《将未排序数组转化为堆》</strong>讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：</p>
-<ol>
+        <h3 id="前言">前言</h3>
+<p>之前一篇blog<strong>《将未排序数组转化为堆》</strong>讲了如何将未排序的数组转化成最大堆，本文接着上次的内容继续。主要涉及到的内容包括：</p>
+<ol style="list-style-type: decimal">
 <li>接着上一篇，分析create_maxheap函数的时间复杂度；</li>
 <li>实现heapsort算法</li>
 <li>分析heapsort的时间复杂度</li>
 </ol>
 <p><em>参考书目：CLRS 6.1-6.4</em></p>
 <p>可以预见本文将不得不利用一点数学推导来进行分析，太可怕了🌚</p>
-<h3 id="create-maxheap的时间复杂度分析"><a href="#create-maxheap的时间复杂度分析" class="headerlink" title="create_maxheap的时间复杂度分析"></a>create_maxheap的时间复杂度分析</h3><h4 id="粗略分析：loose-bound"><a href="#粗略分析：loose-bound" class="headerlink" title="粗略分析：loose bound"></a>粗略分析：loose bound</h4><p>首先来回顾一下代码：</p>
+<h3 id="create_maxheap的时间复杂度分析">create_maxheap的时间复杂度分析</h3>
+<h4 id="粗略分析loose-bound">粗略分析：loose bound</h4>
+<p>首先来回顾一下代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create_maxheap</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = n / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        max_heapify2(<span class="built_in">array</span>, n, i);</span><br><span class="line">        i--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第一眼看起来，这个函数的时间复杂度应该是$O(n\cdot O(max\ heapify))$，而max_heapify的时间复杂度在之前的blog中已经分析过了，是O(lg n)。所以至少可以得到一个大致的时间复杂度应该是$o(n\cdot \lg n)$。（O表示tight upper bound，而o则不是）。然而我们可以做得更加精确一些。</p>
-<p>我们已经知道，对于一个有n个节点的heap来说，其中某个节点调用max_heapify的时间复杂度为O(h)，h为该节点的height。<strong>因此，每一层调用max_heapify执行的工作量是不一样的。</strong>譬如在height=1的那一层（即leaf节点层的上一层）调用max_heapify的步骤为<code>1c</code>，而在root的调用时间则是$\lg n \cdot c$，c是常数。</p>
+<p>第一眼看起来，这个函数的时间复杂度应该是<code>O(n * O(max_heapify2))</code>，而max_heapify的时间复杂度在之前的blog中已经分析过了，是O(lg n)。所以至少可以得到一个大致的时间复杂度应该是<code>o(n*lg n)</code>。（O表示tight upper bound，而o则不是）。然而我们可以做得更加精确一些。</p>
+<p>我们已经知道，对于一个有n个节点的heap来说，其中某个节点调用max_heapify的时间复杂度为O(h)，h为该节点的height。<strong>因此，每一层调用max_heapify执行的工作量是不一样的。</strong>譬如在height=1的那一层（即leaf节点层的上一层）调用max_heapify的步骤为<code>1c</code>，而在root的调用时间则是<code>lg(n)c</code>，c是常数。</p>
 <p>所以为了知道总的时间，还需要知道<strong>每一层的节点数与height的关系</strong>。</p>
-<h4 id="每一层的节点数与height的关系"><a href="#每一层的节点数与height的关系" class="headerlink" title="每一层的节点数与height的关系"></a>每一层的节点数与height的关系</h4><p><strong>注意</strong>: 推导时，假设heap构成了一棵full binary tree。</p>
-<p><img src="/images/fullbt.png" alt=""></p>
-<p><strong>解释</strong>: 这是为了求得每一层最多时候的情况而规定的，同时当n趋近于$\infty$的时候，leaf层是否满足full binary tree的定义对得到的规律而言无影响，但是会大大简化推导的过程。</p>
-<p>对于一棵节点总数为n的full binary tree来说，其每一层的节点数是一个$r=2$的等比数列，所以节点数之和与深度depth的关系为：<br>$$<br>\begin{eqnarray<em>}<br>\large n<br>&amp;=&amp;\sum_{d=1}^{\lg n} r^d = \frac{1-r^d}{1-r} \ \ \ \ \ (r\neq1)\\<br>&amp;&amp;带入r=2, 有:\\<br>&amp;=&amp; \frac{1-2^d}{1-2}\<br>&amp;=&amp; 2^d-1<br>\end{eqnarray</em>}<br>$$<br>其中，d为该层的节点的深度(depth)。对于一棵full binary tree我们知道，节点的depth和height存在关系：$d+h=\lg n$，其中n为总的节点数，h为height。所以(A)式可以改写为：<br>$$<br>\large n \normalsize = 2^{\lg n - h} - 1\ \ \ \ \<br>$$<br>现在来求$h = h<em>{0}$时，该层有多少个节点。方法很简单，只需要用从顶点到$h</em>{0}$层的总节点数减去从顶点到$h<em>{0} +1$层的总节点数即可算出：<br>$$<br>\begin{eqnarray*}<br>S</em>{0}<br>&amp;=&amp;(2^{\lg n - h<em>{0}} - 1) - (2^{\lg n - (h</em>{0}+1)} -1)\<br>&amp;=&amp;\frac{2^{\lg n}}{2^{h<em>{0}+1}}\<br>&amp;=&amp;\frac{n}{2^{h</em>{0}+1}}\<br>\end{eqnarray*}<br>$$<br>由此，可以证明每一层最多含有$\lceil\frac{n}{2^{h+1}}\rceil$个节点。（这个证明是CLRS中的一道习题）</p>
-<h4 id="推导create-maxheap的时间复杂度"><a href="#推导create-maxheap的时间复杂度" class="headerlink" title="推导create_maxheap的时间复杂度"></a>推导create_maxheap的时间复杂度</h4><p>证明了对于一个heap来说每一层最多有$\lceil\frac{n}{2^{h+1}}\rceil$个节点之后，就可以进一步推导create_maxheap的时间复杂度了。有：<br>$$<br>T(h) = \frac{n}{2^{1+1}}(1c) +  \frac{n}{2^{2+1}}(2c) + \cdots +  \frac{n}{2^{\lg(n)}}(\lg(\frac{n}{2})\cdot c) +  \frac{n}{2^{\lg(n)+1}}(\lg(n)\cdot c) \ \ \ \ \ (a)<br>$$<br>其中，$h\in[1,\lg(n)]$闭区间。这个很容易理解，当h也就是height为1的时候，就是leaf层的上一层；当h为$\lg(n)$的时候，就是root节点了。(a)式的每一项由两个部分组成，第一部分为层节点数，第二部分为每个该层节点需要做的work，c为一个常数。</p>
-<p>对于(a)式提取公因式$\frac{cn}{2^{1+1}}$，可以得到：<br>$$<br>T(h) = \frac{cn}{4}\cdot (\normalsize 1 + \frac{2}{2} + \frac{3}{4} + \frac{4}{8} + \frac{5}{16} + \cdots + \frac{h}{2^{h-1}}) \ \ \ \ \  (b)<br>$$<br>即：<br>$$<br>T(h) = \frac{cn}{4}\cdot (1 + \sum<em>{h=1}^{\lg(n)} \frac{h}{2^{h-1}}) \ \ \ \ \  (c)<br>$$<br>容易发现，$\sum</em>{h=1}^{\lg(n)} \frac{h}{2^{h-1}}$这一项可以拆解为等差数列和等比数列的商，进一步简化可以写为$\sum<em>{h=0}^{\lg(n)} \frac{h}{2^{h}}$，然后当：<br>$$<br>\sum</em>{h=0}^{\infty} \frac{h}{2^{h}} \ \ \ \ \ (d)<br>$$<br>(d)式满足公式：$\sum<em>{k=0}^{\infty} kx^k = \frac{x}{(1-x)^2}$（<strong>公式证明可见维基百科</strong>），当且仅当$\vert k \vert &lt; 1$时成立。这里$k = \frac{1}{2}$，因此(d)式收敛于：<br>$$<br>\sum</em>{h=0}^{\infty} \frac{h}{2^h} = \frac{1/2}{(1- 1/2)^2} = 2 \ \ \ \ \ (e)<br>$$</p>
-<p>于是结合(e), (c)两式有：<br>$$<br>\begin {eqnarray<em>}<br> \large O(\normalsize \frac{cn}{4}\cdot(1+\sum<em>{h=1}^{\lg(n)} \frac{h}{2^{h-1}})\large)\normalsize<br> &amp;=&amp;\large O(\normalsize\frac{cn}{4}\cdot(1+\sum</em>{h=0}^{\infty} \frac{h}{2^{h}})\large) \<br> &amp;=&amp;\large O(\normalsize\frac{cn}{4}\cdot(1+2)\large)\ \<br> &amp;=&amp;\large O(\normalsize\frac{3cn}{4}\large)\ \<br> &amp;=&amp;\large O(\normalsize n \large)<br>\end {eqnarray</em>}<br>$$<br>至此，证明完毕。可知create_maxheap的时间复杂度是线性的。</p>
-<h3 id="heapsort算法"><a href="#heapsort算法" class="headerlink" title="heapsort算法"></a>heapsort算法</h3><p>同样，这个部分也分为两个子内容，首先实现heapsort算法，然后分析其时间复杂度。</p>
-<h4 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h4><p>在之前的<code>max_heapify</code>函数和<code>create_maxheap</code>函数的基础上，实现heapsort算法就比较简单了。用自然语言描述的话如下：</p>
-<ol>
+<h4 id="每一层的节点数与height的关系">每一层的节点数与height的关系</h4>
+<p><strong>注意</strong>: 推导时，假设heap构成了一棵full binary tree。</p>
+<p><strong>解释</strong>: 这是为了求得每一层最多时候的情况而规定的，同时当n趋近于<span class="math inline">\(\infty\)</span>的时候，leaf层是否满足full binary tree的定义对得到的规律而言无影响，但是会大大简化推导的过程。</p>
+<p>对于一棵节点总数为n的full binary tree来说，其每一层的节点数是一个<span class="math inline">\(r=2\)</span>的等比数列，所以节点数之和与深度depth的关系为： 
+$$
+\begin{eqnarray*}
+\large n
+&=&\sum_{d=1}^{\lg n} r^d = \frac{1-r^d}{1-r} \ \ \ \ \ (r\neq1)\\\\
+&&带入r=2, 有:\\\\
+&=& \frac{1-2^d}{1-2}\\
+&=& 2^d-1
+\end{eqnarray*}
+$$
+ 其中，d为该层的节点的深度(depth)。对于一棵full binary tree我们知道，节点的depth和height存在关系：<span class="math inline">\(d+h=\lg n\)</span>，其中n为总的节点数，h为height。所以(A)式可以改写为： 
+$$
+\large n \normalsize = 2^{\lg n - h} - 1\ \ \ \ \
+$$
+ 现在来求<span class="math inline">\(h = h_{0}\)</span>时，该层有多少个节点。方法很简单，只需要用从顶点到<span class="math inline">\(h_{0}\)</span>层的总节点数减去从顶点到<span class="math inline">\(h_{0} +1\)</span>层的总节点数即可算出： 
+$$
+\begin{eqnarray*}
+S_{0}
+&=&(2^{\lg n - h_{0}} - 1) - (2^{\lg n - (h_{0}+1)} -1)\\
+&=&\frac{2^{\lg n}}{2^{h_{0}+1}}\\
+&=&\frac{n}{2^{h_{0}+1}}\\
+\end{eqnarray*}
+$$
+ 由此，可以证明每一层最多含有<span class="math inline">\(\lceil\frac{n}{2^{h+1}}\rceil\)</span>个节点。（这个证明是CLRS中的一道习题）</p>
+<h4 id="推导create_maxheap的时间复杂度">推导create_maxheap的时间复杂度</h4>
+<p>证明了对于一个heap来说每一层最多有<span class="math inline">\(\lceil\frac{n}{2^{h+1}}\rceil\)</span>个节点之后，就可以进一步推导create_maxheap的时间复杂度了。有： <span class="math display">\[
+T(h) = \frac{n}{2^{1+1}}(1c) +  \frac{n}{2^{2+1}}(2c) + \cdots +  \frac{n}{2^{\lg(n)}}(\lg(\frac{n}{2})\cdot c) +  \frac{n}{2^{\lg(n)+1}}(\lg(n)\cdot c) \ \ \ \ \ (a)
+\]</span> 其中，<span class="math inline">\(h\in[1,\lg(n)]\)</span>闭区间。这个很容易理解，当h也就是height为1的时候，就是leaf层的上一层；当h为<span class="math inline">\(\lg(n)\)</span>的时候，就是root节点了。(a)式的每一项由两个部分组成，第一部分为层节点数，第二部分为每个该层节点需要做的work，c为一个常数。</p>
+<p>对于(a)式提取公因式<span class="math inline">\(\frac{cn}{2^{1+1}}\)</span>，可以得到： <span class="math display">\[
+T(h) = \frac{cn}{4}\cdot (\normalsize 1 + \frac{2}{2} + \frac{3}{4} + \frac{4}{8} + \frac{5}{16} + \cdots + \frac{h}{2^{h-1}}) \ \ \ \ \  (b)
+\]</span> 即： <span class="math display">\[
+T(h) = \frac{cn}{4}\cdot (1 + \sum_{h=1}^{\lg(n)} \frac{h}{2^{h-1}}) \ \ \ \ \  (c)
+\]</span> 容易发现，<span class="math inline">\(\sum_{h=1}^{\lg(n)} \frac{h}{2^{h-1}}\)</span>这一项可以拆解为等差数列和等比数列的商，进一步简化可以写为<span class="math inline">\(\sum_{h=0}^{\lg(n)} \frac{h}{2^{h}}\)</span>，然后当： <span class="math display">\[
+\sum_{h=0}^{\infty} \frac{h}{2^{h}} \ \ \ \ \ (d)
+\]</span> (d)式满足公式：<span class="math inline">\(\sum_{k=0}^{\infty} kx^k = \frac{x}{(1-x)^2}\)</span>（<strong>公式证明可见维基百科</strong>），当且仅当<span class="math inline">\(\vert k \vert &lt; 1\)</span>时成立。这里<span class="math inline">\(k = \frac{1}{2}\)</span>，因此(d)式收敛于： <span class="math display">\[
+\sum_{h=0}^{\infty} \frac{h}{2^h} = \frac{1/2}{(1- 1/2)^2} = 2 \ \ \ \ \ (e)
+\]</span></p>
+<p>于是结合(e), (c)两式有： <span class="math display">\[
+\begin {eqnarray*}
+ \large O(\normalsize \frac{cn}{4}\cdot(1+\sum_{h=1}^{\lg(n)} \frac{h}{2^{h-1}})\large)\normalsize
+ &amp;=&amp;\large O(\normalsize\frac{cn}{4}\cdot(1+\sum_{h=0}^{\infty} \frac{h}{2^{h}})\large) \\
+ &amp;=&amp;\large O(\normalsize\frac{cn}{4}\cdot(1+2)\large)\\ \\
+ &amp;=&amp;\large O(\normalsize\frac{3cn}{4}\large)\\ \\
+ &amp;=&amp;\large O(\normalsize n \large)
+\end {eqnarray*}
+\]</span> 至此，证明完毕。可知create_maxheap的时间复杂度是线性的。</p>
+<h3 id="heapsort算法">heapsort算法</h3>
+<p>同样，这个部分也分为两个子内容，首先实现heapsort算法，然后分析其时间复杂度。</p>
+<h4 id="算法实现">算法实现</h4>
+<p>在之前的<code>max_heapify</code>函数和<code>create_maxheap</code>函数的基础上，实现heapsort算法就比较简单了。用自然语言描述的话如下：</p>
+<ol style="list-style-type: decimal">
 <li>对一个无序array调用<code>create_maxheap</code>函数，将其转化为一个max heap</li>
-<li>找到array中的最大元素，即array[1]  (根据定义max heap的root上的元素是整个array中最大的)</li>
+<li>找到array中的最大元素，即array[1] (根据定义max heap的root上的元素是整个array中最大的)</li>
 <li>交换array[1]和最后一个元素，这样最大的元素到了array的最后</li>
 <li>通过将array的长度减小1来把最后一个元素丢出array</li>
 <li>对缩小长度后的array从第一个元素（亦即heap root）调用<code>max_heapify</code>函数</li>
@@ -392,15 +440,20 @@ create_maxheap的时间复杂度分析粗">
 <p>经过这个过程之后，原无序array中的元素就会以非递减的顺序排列。<strong>其本质上就是将在root位置的当前最大元素和当前最后一个元素交换位置，然后再重构整个heap使得缩小长度by 1的那个array再次满足max heap的定义。</strong>这样就实现了排序的目的。代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapsort</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="comment">/* n is the total nodes in the heap</span><br><span class="line">     * i is the start node to call this function</span><br><span class="line">     * n is also the last suffix of array, though total length of array</span><br><span class="line">     is n + 1 (first element of the array is not used.)</span><br><span class="line">     */</span></span><br><span class="line">    create_maxheap(<span class="built_in">array</span>, n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt; <span class="number">1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        SWAP(<span class="built_in">array</span>[<span class="number">1</span>], <span class="built_in">array</span>[i], temp);</span><br><span class="line">        <span class="comment">//printf("i: %d -&gt; %-5d", i, array[i]);</span></span><br><span class="line">        <span class="comment">//display(array, 11);</span></span><br><span class="line">        max_heapify2(<span class="built_in">array</span>, i<span class="number">-1</span>, <span class="number">1</span>); <span class="comment">// max_heapify1 ok but max_heapify2 bug</span></span><br><span class="line">        <span class="comment">//printf("             ");</span></span><br><span class="line">        <span class="comment">//display(array, 11);</span></span><br><span class="line">        <span class="comment">//printf("\n");</span></span><br><span class="line">        <span class="comment">/* decrement array size by 1, the biggest sorted item is put there</span><br><span class="line">        so that when calls max_heapify from root, the sorted part remain</span><br><span class="line">        untouched. */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果想要了解是如何通过一次次循环进行排序的，可以取消单行注释，对trace through整个过程有一定的帮助。</p>
-<h4 id="heapsort算法的时间复杂度分析"><a href="#heapsort算法的时间复杂度分析" class="headerlink" title="heapsort算法的时间复杂度分析"></a>heapsort算法的时间复杂度分析</h4><p>分析heapsort的算法时间复杂度，需要看起算法每一步的时间复杂度。</p>
-<ol>
-<li>$O(n)$</li>
-<li>一次循环需要$O(1)$， 总共要循环 $n-1$ 次，因此是$O(n)$</li>
-<li>一次循环需要$O(1)$， 总共要循环 $n-1$ 次，因此是$O(n)$</li>
-<li>一次循环需要$O(1)$， 总共要循环 $n-1$ 次，因此是$O(n)$</li>
-<li>一次循环需要$O(\lg n)$， 总共要循环 $n-1$ 次，因此是$O(n\cdot \lg n)$</li>
+<h4 id="heapsort算法的时间复杂度分析">heapsort算法的时间复杂度分析</h4>
+<p>分析heapsort的算法时间复杂度，需要看起算法每一步的时间复杂度。</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(O(n)\)</span></li>
+<li>一次循环需要<span class="math inline">\(O(1)\)</span>， 总共要循环 <span class="math inline">\(n-1\)</span> 次，因此是<span class="math inline">\(O(n)\)</span></li>
+<li>一次循环需要<span class="math inline">\(O(1)\)</span>， 总共要循环 <span class="math inline">\(n-1\)</span> 次，因此是<span class="math inline">\(O(n)\)</span></li>
+<li>一次循环需要<span class="math inline">\(O(1)\)</span>， 总共要循环 <span class="math inline">\(n-1\)</span> 次，因此是<span class="math inline">\(O(n)\)</span></li>
+<li>一次循环需要<span class="math inline">\(O(\lg n)\)</span>， 总共要循环 <span class="math inline">\(n-1\)</span> 次，因此是<span class="math inline">\(O(n\cdot \lg n)\)</span></li>
 </ol>
-<p>所以heapsort算法的时间复杂度为$O(n\cdot \lg n)$，且易知空间复杂度为$O(n)$，即in place。</p>
+<p>所以heapsort算法的时间复杂度为<span class="math inline">\(O(n\cdot \lg n)\)</span>，且易知空间复杂度为<span class="math inline">\(O(n)\)</span>，即in place。</p>
+<h3 id="后记">后记</h3>
+<p>本文写作的时候又遇到了一个坑，就是Latex和markdown的语法冲突问题。各方查阅了很久，终于选择了用:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125; ... &#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+<p>这对tag将所有包含Latex的地方包裹起来的简单粗暴方法。原因只有一个，就是我只是偶尔才写一点数学公式而已，临时性的策略就足够了😂</p>
 
       
     </div>
@@ -455,10 +508,10 @@ create_maxheap的时间复杂度分析粗">
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/19/heapsort/"
+        <div class="ds-share flat" data-thread-key="2016/05/20/heapsort/"
      data-title="heapsort"
      data-content=""
-     data-url="http://spencerpomme.github.io/2016/05/19/heapsort/">
+     data-url="http://spencerpomme.github.io/2016/05/20/heapsort/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -485,8 +538,8 @@ create_maxheap的时间复杂度分析粗">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/19/heapsort/"
-           data-title="heapsort" data-url="http://spencerpomme.github.io/2016/05/19/heapsort/">
+      <div class="ds-thread" data-thread-key="2016/05/20/heapsort/"
+           data-title="heapsort" data-url="http://spencerpomme.github.io/2016/05/20/heapsort/">
       </div>
     
   </div>
@@ -619,7 +672,7 @@ create_maxheap的时间复杂度分析粗">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create-maxheap的时间复杂度分析"><span class="nav-number">2.</span> <span class="nav-text">create_maxheap的时间复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#粗略分析：loose-bound"><span class="nav-number">2.1.</span> <span class="nav-text">粗略分析：loose bound</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#每一层的节点数与height的关系"><span class="nav-number">2.2.</span> <span class="nav-text">每一层的节点数与height的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推导create-maxheap的时间复杂度"><span class="nav-number">2.3.</span> <span class="nav-text">推导create_maxheap的时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#heapsort算法"><span class="nav-number">3.</span> <span class="nav-text">heapsort算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法实现"><span class="nav-number">3.1.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#heapsort算法的时间复杂度分析"><span class="nav-number">3.2.</span> <span class="nav-text">heapsort算法的时间复杂度分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create_maxheap的时间复杂度分析"><span class="nav-number">2.</span> <span class="nav-text">create_maxheap的时间复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#粗略分析loose-bound"><span class="nav-number">2.1.</span> <span class="nav-text">粗略分析：loose bound</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#每一层的节点数与height的关系"><span class="nav-number">2.2.</span> <span class="nav-text">每一层的节点数与height的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推导create_maxheap的时间复杂度"><span class="nav-number">2.3.</span> <span class="nav-text">推导create_maxheap的时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#heapsort算法"><span class="nav-number">3.</span> <span class="nav-text">heapsort算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法实现"><span class="nav-number">3.1.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#heapsort算法的时间复杂度分析"><span class="nav-number">3.2.</span> <span class="nav-text">heapsort算法的时间复杂度分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
             
           </div>
         </section>
