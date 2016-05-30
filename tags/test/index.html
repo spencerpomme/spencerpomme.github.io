@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="gcc," />
+  <meta name="keywords" content="record" />
 
 
 
@@ -82,16 +82,15 @@
 
 
 
-<meta name="description" content="之前在学习数据结构的时候（现在还没有学完orz）发现，其实学习到后边的树、图之类的数据结构的时候，经常会用到stack和queue这两个更为基础的数据结构，需要经常性地包含它们的头文件。一直以来都直接用IDE来做这个事情，直到有一天觉得每次做题都要新建一个工程然后添加文件很麻烦，就决定把常用数据结构的.c和.h放在一个文件夹里，题目做完了就把problem.c放到这个文件夹里用命令行编译一下就得了">
-<meta property="og:type" content="article">
-<meta property="og:title" content="c多文件编译的命令行方法（gcc）">
-<meta property="og:url" content="http://spencerpomme.github.io/2016/04/17/c多文件编译的命令行方法（gcc）/index.html">
+<meta name="description" content="看书，做饭，写代码">
+<meta property="og:type" content="website">
+<meta property="og:title" content="品森">
+<meta property="og:url" content="http://spencerpomme.github.io/tags/test/index.html">
 <meta property="og:site_name" content="品森">
-<meta property="og:description" content="之前在学习数据结构的时候（现在还没有学完orz）发现，其实学习到后边的树、图之类的数据结构的时候，经常会用到stack和queue这两个更为基础的数据结构，需要经常性地包含它们的头文件。一直以来都直接用IDE来做这个事情，直到有一天觉得每次做题都要新建一个工程然后添加文件很麻烦，就决定把常用数据结构的.c和.h放在一个文件夹里，题目做完了就把problem.c放到这个文件夹里用命令行编译一下就得了">
-<meta property="og:updated_time" content="2016-04-18T06:34:43.000Z">
+<meta property="og:description" content="看书，做饭，写代码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="c多文件编译的命令行方法（gcc）">
-<meta name="twitter:description" content="之前在学习数据结构的时候（现在还没有学完orz）发现，其实学习到后边的树、图之类的数据结构的时候，经常会用到stack和queue这两个更为基础的数据结构，需要经常性地包含它们的头文件。一直以来都直接用IDE来做这个事情，直到有一天觉得每次做题都要新建一个工程然后添加文件很麻烦，就决定把常用数据结构的.c和.h放在一个文件夹里，题目做完了就把problem.c放到这个文件夹里用命令行编译一下就得了">
+<meta name="twitter:title" content="品森">
+<meta name="twitter:description" content="看书，做饭，写代码">
 
 
 
@@ -109,7 +108,7 @@
   };
 </script>
 
-  <title> c多文件编译的命令行方法（gcc） | 品森 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 标签: test | 品森 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -139,7 +138,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,181 +236,46 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                c多文件编译的命令行方法（gcc）
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-17T15:27:07+08:00" content="2016-04-17">
-              2016-04-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/CS/" itemprop="url" rel="index">
-                    <span itemprop="name">CS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/17/c多文件编译的命令行方法（gcc）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/17/c多文件编译的命令行方法（gcc）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/17/c多文件编译的命令行方法（gcc）/" class="leancloud_visitors" data-flag-title="c多文件编译的命令行方法（gcc）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>之前在学习数据结构的时候（现在还没有学完orz）发现，其实学习到后边的树、图之类的数据结构的时候，经常会用到stack和queue这两个更为基础的数据结构，需要经常性地包含它们的头文件。一直以来都直接用IDE来做这个事情，直到有一天觉得每次做题都要新建一个工程然后添加文件很麻烦，就决定把常用数据结构的.c和.h放在一个文件夹里，题目做完了就把problem.c放到这个文件夹里用命令行编译一下就得了。</p>
-<p>其实挺起来好像还是挺麻烦的，不过就当作是增添一项新经验也好。具体做法如下：（以stack.c和stack.h为例）</p>
-<ol style="list-style-type: decimal">
-<li>把需要一起变一的文件都放入一个directory里边去</li>
-<li><p>cmd/powershell(windows平台)进行如下操作：</p>
-<p><code>&gt;&gt;&gt; gcc -std=c99 stack.c problem.c -o main</code></p></li>
-</ol>
-<p>这样在文件夹里就会出现一个名为main.exe的文件了。</p>
-
-      
-    </div>
-    
-    <div>
-      
-        
-      
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        test
+        <small>标签</small>
+      </h2>
     </div>
 
-    <div>
+    
       
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-      
-    </div>
+            <a class="post-title-link" href="/2016/05/24/test-html/" itemprop="url">
+              
+                <span itemprop="name">test html</span>
+              
+            </a>
+        
+      </h1>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/gcc/" rel="tag">#gcc</a>
-          
-        </div>
-      
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-05-24T23:05:48+08:00"
+              content="2016-05-24" >
+          05-24
+        </time>
+      </div>
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/01/用python写一个豆瓣小组的爬虫（一）/" rel="prev" title="用python写一个豆瓣小组的爬虫（一）">
-                用python写一个豆瓣小组的爬虫（一） <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-        <div class="ds-share flat" data-thread-key="2016/04/17/c多文件编译的命令行方法（gcc）/"
-     data-title="c多文件编译的命令行方法（gcc）"
-     data-content=""
-     data-url="http://spencerpomme.github.io/2016/04/17/c多文件编译的命令行方法（gcc）/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
+    
   </div>
-</div>
-      
-    </div>
-  </div>
+
+  
 
 
           </div>
@@ -419,14 +283,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/04/17/c多文件编译的命令行方法（gcc）/"
-           data-title="c多文件编译的命令行方法（gcc）" data-url="http://spencerpomme.github.io/2016/04/17/c多文件编译的命令行方法（gcc）/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -446,17 +302,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -484,7 +331,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -548,17 +395,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <p class="post-toc-empty">此文章未包含目录</p>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -663,10 +499,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 

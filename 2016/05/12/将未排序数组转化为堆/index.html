@@ -83,19 +83,22 @@
 
 
 <meta name="description" content="本文是由学习MIT 6.006和Introduction to algorithms这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。本文的代码使用C语言。
-堆的数组存储方式首先，之所以可以将array转化成heap，是因为heap可">
+堆的数组存储方式
+首先，之所以可以将array转化成heap，是因为heap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="将未排序数组转化为堆">
 <meta property="og:url" content="http://spencerpomme.github.io/2016/05/12/将未排序数组转化为堆/index.html">
 <meta property="og:site_name" content="品森">
 <meta property="og:description" content="本文是由学习MIT 6.006和Introduction to algorithms这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。本文的代码使用C语言。
-堆的数组存储方式首先，之所以可以将array转化成heap，是因为heap可">
+堆的数组存储方式
+首先，之所以可以将array转化成heap，是因为heap">
 <meta property="og:image" content="http://spencerpomme.github.io/images/heap1.png">
 <meta property="og:updated_time" content="2016-05-19T07:34:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="将未排序数组转化为堆">
 <meta name="twitter:description" content="本文是由学习MIT 6.006和Introduction to algorithms这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。本文的代码使用C语言。
-堆的数组存储方式首先，之所以可以将array转化成heap，是因为heap可">
+堆的数组存储方式
+首先，之所以可以将array转化成heap，是因为heap">
 <meta name="twitter:image" content="http://spencerpomme.github.io/images/heap1.png">
 
 
@@ -339,15 +342,20 @@
 
       
         <p>本文是由学习MIT 6.006和<strong>Introduction to algorithms</strong>这本书的笔记转化而来的。虽然之前学习过heap的相关内容，但是通过上课来查缺补漏，发现还是有很多之前遗漏的地方。这篇文章就是讲怎样把一个已经存在的array通过O(1) space转化为一个max/min heap。本文的代码使用C语言。</p>
-<h3 id="堆的数组存储方式"><a href="#堆的数组存储方式" class="headerlink" title="堆的数组存储方式"></a>堆的数组存储方式</h3><p>首先，之所以可以将array转化成heap，是因为heap可以用array来存储。heap在本质上是一棵binary tree，但是由于根据定义，heap同时也是一棵complete binary tree，所以通过array来存储可以通过suffix关系来表示树的parent-child关系，既节省空间又不损失信息。</p>
+<h3 id="堆的数组存储方式">堆的数组存储方式</h3>
+<p>首先，之所以可以将array转化成heap，是因为heap可以用array来存储。heap在本质上是一棵binary tree，但是由于根据定义，heap同时也是一棵complete binary tree，所以通过array来存储可以通过suffix关系来表示树的parent-child关系，既节省空间又不损失信息。</p>
 <p>假设有一个array A，其中有10个未排序的整数元素：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> A[<span class="number">11</span>] = &#123;<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">45</span>, <span class="number">11</span>, <span class="number">23</span>, <span class="number">9</span>, <span class="number">74</span>, <span class="number">4</span>&#125;;</span><br></pre></td></tr></table></figure>
 <p>需要注意的地方在于，heap从array的第二个元素位置开始存储，既下表为A[1]开始。这样做是为了满足以下关系：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(sudo code)</span><br><span class="line">if parent suffix is i, then:</span><br><span class="line">left child suffix is 2i,</span><br><span class="line">right child suffix is 2i + 1.</span><br></pre></td></tr></table></figure>
 <p>根据定义，上边的array A是一棵complete binary tree，其结构如下：</p>
-<p><img src="/images/heap1.png" alt=""></p>
+<div class="figure">
+<img src="/images/heap1.png">
+
+</div>
 <p>这个结构目前不符合heap的定义（既不是max heap也不是min heap），所以需要对array中的元素进行操作，使得array A满足heap的定义。</p>
-<h3 id="写一个max-heapify函数"><a href="#写一个max-heapify函数" class="headerlink" title="写一个max_heapify函数"></a>写一个max_heapify函数</h3><p>前边说要在O(1) space完成这个变换，即不开另一个array把array A依次按照符合heap定义的次序填装进去，而是在原本的array内进行swap操作。整个过程就是一个in place的heap sort. 在此之前有一个步骤要做，就是构造一个max_heapify函数。</p>
+<h3 id="写一个max_heapify函数">写一个max_heapify函数</h3>
+<p>前边说要在O(1) space完成这个变换，即不开另一个array把array A依次按照符合heap定义的次序填装进去，而是在原本的array内进行swap操作。整个过程就是一个in place的heap sort. 在此之前有一个步骤要做，就是构造一个max_heapify函数。</p>
 <p>若一个node的左子树和右子树<strong>均为max heap</strong>，那么，该node递归向下地<strong>与其左右child比较大小并交换位置</strong>（当且仅当node小于其child时），并依次向下，直到:（A）node与其左右child满足了max heap的定义; 或（B）node成为了leaf node。严格来讲，(B)是(A)的特殊情况，因为leaf node不存在child，这本身也满足max heap的定义（即leaf nodes always satisfy the definition of max heap). 另外必须明确的一点是，之所以可以在达成条件（A）时停止，是因为根据前提条件，node的左右子树应满足heap的定义。</p>
 <p>代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SWAP(x, y, a) ((a)=(x);(x)=(y);(y)=(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a, b) ((a)&gt;(b))? (a): (b)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">max_heapify</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> n, <span class="keyword">int</span> i)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="comment">/* n is the total nodes in the heap</span><br><span class="line">     * i is the start node to call this function</span><br><span class="line">     * n is also the last suffix of array, though total length of array is n + 1 (first element of the array is not used.)</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">while</span> (i &lt;= n/<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">if</span> (i*<span class="number">2</span>+<span class="number">1</span> &lt;= n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> child = MAX(array[i*<span class="number">2</span>], array[i*<span class="number">2</span>+<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (child &gt; <span class="built_in">array</span>[i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">array</span>[i*<span class="number">2</span>] == child)</span><br><span class="line">                &#123;</span><br><span class="line">                    SWAP(<span class="built_in">array</span>[i], <span class="built_in">array</span>[i*<span class="number">2</span>], temp);</span><br><span class="line">                    i *= <span class="number">2</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (array[i*<span class="number">2</span>+<span class="number">1</span>] == child)</span><br><span class="line">                &#123;</span><br><span class="line">                    SWAP(array[i], array[i*<span class="number">2</span>+<span class="number">1</span>], temp);</span><br><span class="line">                    i = <span class="number">2</span>*i+<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (i*<span class="number">2</span> &lt;= n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[i] &lt; array[i*<span class="number">2</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                SWAP(array[i], array[i*<span class="number">2</span>], temp);</span><br><span class="line">                i *= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -362,22 +370,21 @@
 <p>如果根据数组构建二叉树则可以发现，通过调用max_heapify，已经将A[2]这个节点移动到了正确的地方。</p>
 <p>由于max_heapify会从开始的节点递归地向下，直到满足heap定义为止，那么它的时间复杂度该怎样计算呢？简单推倒一下：</p>
 <ul>
-<li><p>首先，对某个节点A[i]调用max_heapify，那么假设以这个节点为root的子树有n个节点。</p>
-</li>
-<li><p>因为节点A[i]在一棵complete binary tree中，因此以A[i]为root的子树也是一棵complete binary tree</p>
-</li>
-<li><p>对于一个有n个节点的complete binary tree，从root到leaf的path 为:</p>
-<p><code>h = lg n</code></p>
-</li>
+<li><p>首先，对某个节点A[i]调用max_heapify，那么假设以这个节点为root的子树有n个节点。</p></li>
+<li><p>因为节点A[i]在一棵complete binary tree中，因此以A[i]为root的子树也是一棵complete binary tree</p></li>
+<li><p>对于一个有n个节点的complete binary tree，从root到leaf的path 为:</p></li>
 </ul>
+<p><code>h = lg n</code></p>
 <p>综上所述，在最坏情况下，对于A[i]节点调用max_heapify可能需要从该节点一路比较并swap到leaf才结束，而对于一个有N个元素的heap（或者在这里准确一点，一个complete binary tree)来说，以A[i]为root的子树有<code>c1 * N</code>个节点，其中c1为一常数且满足<code>0 &lt; c1 &lt;= 1</code>。所以:</p>
 <p><code>T(n) = O(lg(c1*N)) = O(lg(N))</code></p>
-<h3 id="从array生成max-heap"><a href="#从array生成max-heap" class="headerlink" title="从array生成max heap"></a>从array生成max heap</h3><p>因为leaf node总是满足max heap的定义，而对于有n个元素的complete binary tree而言，array[n/2+1], … , array[n]均为leaf node，即这些节点已经满足了max heap的定义，无需调用max_heapify函数进行转化。因此该从i = n/2开始，同时应该是bottom up地向上依次检查节点。这里可以通过定义一个<code>create_heap</code>函数来完成这个工作。代码如下：</p>
+<h3 id="从array生成max-heap">从array生成max heap</h3>
+<p>因为leaf node总是满足max heap的定义，而对于有n个元素的complete binary tree而言，array[n/2+1], … , array[n]均为leaf node，即这些节点已经满足了max heap的定义，无需调用max_heapify函数进行转化。因此该从i = n/2开始，同时应该是bottom up地向上依次检查节点。这里可以通过定义一个<code>create_heap</code>函数来完成这个工作。代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create_maxheap</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = n / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        max_heapify2(<span class="built_in">array</span>, n, i);</span><br><span class="line">        i--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果如下，可以发现成功构造了一个max heap：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 2 1 7 8 45 11 23 9 74 4 </span><br><span class="line">0 74 45 23 9 4 11 7 1 8 2</span><br></pre></td></tr></table></figure>
 <p>在此基础上，就通过O(1) space将一个无序的array构造成了一个max heap。</p>
-<h3 id="create-maxheap的时间复杂度分析"><a href="#create-maxheap的时间复杂度分析" class="headerlink" title="create_maxheap的时间复杂度分析"></a>create_maxheap的时间复杂度分析</h3><p>这部分内容将在下一篇blog中和heap sort一起进行归纳总结。</p>
+<h3 id="create_maxheap的时间复杂度分析">create_maxheap的时间复杂度分析</h3>
+<p>这部分内容将在下一篇blog中和heap sort一起进行归纳总结。</p>
 
       
     </div>
@@ -508,7 +515,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -525,7 +532,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -596,7 +603,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆的数组存储方式"><span class="nav-number">1.</span> <span class="nav-text">堆的数组存储方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写一个max-heapify函数"><span class="nav-number">2.</span> <span class="nav-text">写一个max_heapify函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从array生成max-heap"><span class="nav-number">3.</span> <span class="nav-text">从array生成max heap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create-maxheap的时间复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">create_maxheap的时间复杂度分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆的数组存储方式"><span class="nav-number">1.</span> <span class="nav-text">堆的数组存储方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写一个max_heapify函数"><span class="nav-number">2.</span> <span class="nav-text">写一个max_heapify函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从array生成max-heap"><span class="nav-number">3.</span> <span class="nav-text">从array生成max heap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create_maxheap的时间复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">create_maxheap的时间复杂度分析</span></a></li></ol></div>
             
           </div>
         </section>
