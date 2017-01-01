@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion">
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -70,8 +70,6 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="品森" type="application/atom+xml" />
-
 
 
 
@@ -82,32 +80,26 @@
 
 
 
-<meta name="description" content="内容提要
-本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
+<meta name="description" content="内容提要本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
 
 BST(Binary Search Tree)基本概念
 BST的查询
 
 参考书目 CLRS 12.1-12.3
 这篇blog是关于BST的第一部分。第二部分着重讲BST的插入和删除，而第三部分主要是各种算法的数学证明。
-BST的基本概念
-典型BST节点
-BST，二">
+BST的基本概念典型BST节点BST，二叉搜索">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简明BST(一)">
 <meta property="og:url" content="http://spencerpomme.github.io/2016/05/25/简明BST-一/index.html">
 <meta property="og:site_name" content="品森">
-<meta property="og:description" content="内容提要
-本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
+<meta property="og:description" content="内容提要本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
 
 BST(Binary Search Tree)基本概念
 BST的查询
 
 参考书目 CLRS 12.1-12.3
 这篇blog是关于BST的第一部分。第二部分着重讲BST的插入和删除，而第三部分主要是各种算法的数学证明。
-BST的基本概念
-典型BST节点
-BST，二">
+BST的基本概念典型BST节点BST，二叉搜索">
 <meta property="og:image" content="http://ww3.sinaimg.cn/mw690/618a6a81jw1f4d5oslnivj20cr0503z2.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/mw690/618a6a81jw1f4d5qcu8fwj207p06c0t1.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/mw690/618a6a81jw1f4d5r44qx2j207p067gm7.jpg">
@@ -116,17 +108,14 @@ BST，二">
 <meta property="og:updated_time" content="2016-05-30T01:34:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简明BST(一)">
-<meta name="twitter:description" content="内容提要
-本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
+<meta name="twitter:description" content="内容提要本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
 
 BST(Binary Search Tree)基本概念
 BST的查询
 
 参考书目 CLRS 12.1-12.3
 这篇blog是关于BST的第一部分。第二部分着重讲BST的插入和删除，而第三部分主要是各种算法的数学证明。
-BST的基本概念
-典型BST节点
-BST，二">
+BST的基本概念典型BST节点BST，二叉搜索">
 <meta name="twitter:image" content="http://ww3.sinaimg.cn/mw690/618a6a81jw1f4d5oslnivj20cr0503z2.jpg">
 
 
@@ -145,7 +134,7 @@ BST，二">
   };
 </script>
 
-  <title> 简明BST(一) | 品森 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 简明BST(一) | 品森 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -156,7 +145,7 @@ BST，二">
 
 
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+  <script type="text/javascript">
     (function() {
       var hm = document.createElement("script");
       hm.src = "//tajs.qq.com/stats?sId=55666090";
@@ -369,113 +358,83 @@ BST，二">
       
 
       
-        <h2 id="内容提要">内容提要</h2>
-<p>本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：</p>
-<ol style="list-style-type: decimal">
+        <h2 id="内容提要"><a href="#内容提要" class="headerlink" title="内容提要"></a>内容提要</h2><p>本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：</p>
+<ol>
 <li>BST(Binary Search Tree)基本概念</li>
 <li>BST的查询</li>
 </ol>
 <p><em>参考书目 CLRS 12.1-12.3</em></p>
 <p>这篇blog是关于BST的第一部分。第二部分着重讲BST的插入和删除，而第三部分主要是各种算法的数学证明。</p>
-<h2 id="bst的基本概念">BST的基本概念</h2>
-<h3 id="典型bst节点">典型BST节点</h3>
-<p>BST，二叉搜索树。它首先是一棵二叉树(binary tree)，其次它可以作为一种提供搜索功能的数据结构来使用，即二分查找(binary search)。可以认为BST是一棵特殊的二叉树。</p>
+<h2 id="BST的基本概念"><a href="#BST的基本概念" class="headerlink" title="BST的基本概念"></a>BST的基本概念</h2><h3 id="典型BST节点"><a href="#典型BST节点" class="headerlink" title="典型BST节点"></a>典型BST节点</h3><p>BST，二叉搜索树。它首先是一棵二叉树(binary tree)，其次它可以作为一种提供搜索功能的数据结构来使用，即二分查找(binary search)。可以认为BST是一棵特殊的二叉树。</p>
 <p>一个典型的BST node包涵一个key field和若干其它data field，同时包含三个指针，分别指向其父节点、左子节点和右子节点（分别为parent pointer, left pointer &amp; right pointer）。其结构如下图：</p>
-<div class="figure">
-<img src="http://ww3.sinaimg.cn/mw690/618a6a81jw1f4d5oslnivj20cr0503z2.jpg" alt="fig1">
-<p class="caption">fig1</p>
-</div>
+<p><img src="http://ww3.sinaimg.cn/mw690/618a6a81jw1f4d5oslnivj20cr0503z2.jpg" alt="fig1"></p>
 <p><em>注：在一些书中或课程的描述中，BST节点可能不包含parent pointer。但事实上BST的一些操作总是需要从子节点对父节点进行访问，只不过这些没有定义parent pointer的版本有了另外的迂回方法而已。为了简单直观，本文的BST node definition与CLRS保持一致。</em></p>
-<h3 id="bst性质">BST性质</h3>
-<p>二叉搜索树满足一个特性，称之为Binary Search Tree Property，即：</p>
-<p><strong>对于一个在BST中的节点<span class="math inline">\(x\)</span>, 如果节点<span class="math inline">\(y\)</span>在<span class="math inline">\(x\)</span>的左子树中，那么有 $y.key \leq x.key$ ; 如果<span class="math inline">\(y\)</span>在<span class="math inline">\(x\)</span>的右子树中，则有 $y.key \geq x.key$ .</strong></p>
-<h3 id="树的遍历">树的遍历</h3>
-<p>BST的遍历与一般的binary tree的遍历没有什么不同。分为前序遍历、中序遍历和后序遍历。稍微特殊的一点是，对BST进行中序遍历的效果就是将BST中的元素按照<strong>非递减</strong>(non-descending)的顺序输出。以下图为例，解释三种遍历的不同。</p>
-<div class="figure">
-<img src="http://ww1.sinaimg.cn/mw690/618a6a81jw1f4d5qcu8fwj207p06c0t1.jpg" alt="fig2">
-<p class="caption">fig2</p>
-</div>
-<h4 id="前序遍历preorder-tree-walk">前序遍历(preorder tree walk)</h4>
-<p>定义：在访问BST节点时，访问顺序递归地满足$root \rightarrow left \rightarrow right$的顺序。</p>
+<h3 id="BST性质"><a href="#BST性质" class="headerlink" title="BST性质"></a>BST性质</h3><p>二叉搜索树满足一个特性，称之为Binary Search Tree Property，即：</p>
+<p><strong>对于一个在BST中的节点$x$, 如果节点$y$在$x$的左子树中，那么有 $y.key \leq x.key$ ; 如果$y$在$x$的右子树中，则有 $y.key \geq x.key$ .</strong></p>
+<h3 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h3><p>BST的遍历与一般的binary tree的遍历没有什么不同。分为前序遍历、中序遍历和后序遍历。稍微特殊的一点是，对BST进行中序遍历的效果就是将BST中的元素按照<strong>非递减</strong>(non-descending)的顺序输出。以下图为例，解释三种遍历的不同。</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/618a6a81jw1f4d5qcu8fwj207p06c0t1.jpg" alt="fig2"></p>
+<h4 id="前序遍历-preorder-tree-walk"><a href="#前序遍历-preorder-tree-walk" class="headerlink" title="前序遍历(preorder tree walk)"></a>前序遍历(preorder tree walk)</h4><p>定义：在访问BST节点时，访问顺序递归地满足$root \rightarrow left \rightarrow right$的顺序。</p>
 <p>递归方法代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorderTreeWalk</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> root != <span class="keyword">None</span>:</span><br><span class="line">        print(root.key)</span><br><span class="line">        preorderTreeWalk(root.left)</span><br><span class="line">        preorderTreeWalk(root.right)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorderTreeWalk</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="keyword">if</span> root != <span class="keyword">None</span>:</div><div class="line">        print(root.key)</div><div class="line">        preorderTreeWalk(root.left)</div><div class="line">        preorderTreeWalk(root.right)</div></pre></td></tr></table></figure>
 <p>fig.2的BST的前序遍历结果为<code>a b d e g c f h</code>，可以发现对于BST中的任意一颗子树，均是满足了$root \rightarrow left \rightarrow right$的访问顺序。</p>
-<h4 id="中序遍历inorder-tree-walk">中序遍历(inorder tree walk)</h4>
-<p>定义：在访问BST节点时，访问顺序递归地满足$left \rightarrow root \rightarrow right$的顺序。</p>
+<h4 id="中序遍历-inorder-tree-walk"><a href="#中序遍历-inorder-tree-walk" class="headerlink" title="中序遍历(inorder tree walk)"></a>中序遍历(inorder tree walk)</h4><p>定义：在访问BST节点时，访问顺序递归地满足$left \rightarrow root \rightarrow right$的顺序。</p>
 <p>递归方法代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorderTreeWalk</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> root != <span class="keyword">None</span>:</span><br><span class="line">        inorderTreeWalk(root.left)</span><br><span class="line">        print(root.key)</span><br><span class="line">        inorderTreeWalk(root.right)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorderTreeWalk</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="keyword">if</span> root != <span class="keyword">None</span>:</div><div class="line">        inorderTreeWalk(root.left)</div><div class="line">        print(root.key)</div><div class="line">        inorderTreeWalk(root.right)</div></pre></td></tr></table></figure>
 <p>fig.2的BST的中序遍历结果为<code>d b g e a c h f</code>，可以发现对于BST中的任意一颗子树，均是满足了$left \rightarrow root \rightarrow right$的访问顺序。</p>
-<h4 id="后序遍历postorder-tree-walk">后序遍历(postorder tree walk)</h4>
-<p>定义：在访问BST节点时，访问顺序递归地满足$left \rightarrow right \rightarrow root$的顺序。</p>
+<h4 id="后序遍历-postorder-tree-walk"><a href="#后序遍历-postorder-tree-walk" class="headerlink" title="后序遍历(postorder tree walk)"></a>后序遍历(postorder tree walk)</h4><p>定义：在访问BST节点时，访问顺序递归地满足$left \rightarrow right \rightarrow root$的顺序。</p>
 <p>递归方法代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorderTreeWalk</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> root != <span class="keyword">None</span>:</span><br><span class="line">        postorderTreeWalk(root.left)</span><br><span class="line">        postorderTreeWalk(root.right)</span><br><span class="line">        print(root.key)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorderTreeWalk</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="keyword">if</span> root != <span class="keyword">None</span>:</div><div class="line">        postorderTreeWalk(root.left)</div><div class="line">        postorderTreeWalk(root.right)</div><div class="line">        print(root.key)</div></pre></td></tr></table></figure>
 <p>fig.2的BST的后序遍历结果为<code>d g e b h f c a</code>，可以发现对于BST中的任意一颗子树，均是满足了$left \rightarrow right \rightarrow root$的访问顺序。</p>
-<h4 id="common-feature">common feature</h4>
-<p>其实从”前序“、”中序“和”后续“这个名字就可以看出，这其实是指在访问BST的时候对root的访问顺序。首先访问root节点之后再访问left child和right child的即是”前序“，在left child和right child之间访问root的遍历即是”中序“，先访问left child和right child之后最后访问root的即是”后序“。</p>
+<h4 id="common-feature"><a href="#common-feature" class="headerlink" title="common feature"></a>common feature</h4><p>其实从”前序“、”中序“和”后续“这个名字就可以看出，这其实是指在访问BST的时候对root的访问顺序。首先访问root节点之后再访问left child和right child的即是”前序“，在left child和right child之间访问root的遍历即是”中序“，先访问left child和right child之后最后访问root的即是”后序“。</p>
 <p>此外，前述三种tree walk除了递归写法之外也有迭代写法(iterative approach)，具体实现可以思考一下，或者见这里：</p>
 <p><a href="https://github.com/spencerpomme/FDSC/blob/master/Notes/5-4_BinaryTree_IterTraversal.c" target="_blank" rel="external">BST tree walk iterative</a></p>
 <p>通过观察可以发现，三种遍历都会经过下图的一条路径：</p>
-<div class="figure">
-<img src="http://ww1.sinaimg.cn/mw690/618a6a81jw1f4d5r44qx2j207p067gm7.jpg" alt="fig3">
-<p class="caption">fig3</p>
-</div>
+<p><img src="http://ww1.sinaimg.cn/mw690/618a6a81jw1f4d5r44qx2j207p067gm7.jpg" alt="fig3"></p>
 <p>沿着这条路径从root出发到回到root，每个节点会遇到三次。不同之处在于前序遍历在第一次遇到一个节点时就会将其输出；中序遍历在遇到一个节点第二次时才将其输出，而后序遍历在遇到节点第三次时才将其输出。</p>
-<h2 id="bst的查询">BST的查询</h2>
-<p>BST的查询(Querying of a BST)主要有5种查询操作，包括：</p>
+<h2 id="BST的查询"><a href="#BST的查询" class="headerlink" title="BST的查询"></a>BST的查询</h2><p>BST的查询(Querying of a BST)主要有5种查询操作，包括：</p>
 <ul>
 <li><em>find</em>(tree search)：在BST(或其中某一子树)中搜索并返回一个特定key值的node</li>
 <li><em>minimum</em>：在BST(或其中某一子树)中搜索搜索并返回其中key值最小的node</li>
 <li><em>maximum</em>：在BST(或其中某一子树)中搜索搜索并返回其中key值最大的node</li>
-<li><em>predecessor</em>： 返回给定节点的前一个较小节点(previous smaller node)，即前驱节点</li>
+<li><em>predecessor</em>：  返回给定节点的前一个较小节点(previous smaller node)，即前驱节点</li>
 <li><em>successor</em>：返回给定节点的后一个较大节点(next larger node)，即后继节点</li>
 </ul>
 <p>BST查询操作的时间复杂度包括后文出现的所有算法的时间复杂度将在下一篇关于BST的blog中进行分析。</p>
-<h3 id="find">find</h3>
-<p>递归定义：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(root, key)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root <span class="keyword">or</span> root.key = key:</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line">    <span class="keyword">if</span> root.key &lt; key:</span><br><span class="line">        find(root.left, key)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        find(root.right, key)</span><br></pre></td></tr></table></figure>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p>递归定义：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(root, key)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root <span class="keyword">or</span> root.key = key:</div><div class="line">        <span class="keyword">return</span> root</div><div class="line">    <span class="keyword">if</span> root.key &lt; key:</div><div class="line">        find(root.left, key)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        find(root.right, key)</div></pre></td></tr></table></figure>
 <p>迭代定义：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(root, key)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> root <span class="keyword">and</span> root.key != key:</span><br><span class="line">        <span class="keyword">if</span> root.key &lt; key:</span><br><span class="line">            root = root.left</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            root = root.left</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(root, key)</span>:</span></div><div class="line">    <span class="keyword">while</span> root <span class="keyword">and</span> root.key != key:</div><div class="line">        <span class="keyword">if</span> root.key &lt; key:</div><div class="line">            root = root.left</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            root = root.left</div><div class="line">    <span class="keyword">return</span> root</div></pre></td></tr></table></figure>
 <p>就效率而言，迭代优于递归。</p>
-<h3 id="minimum">minimum</h3>
-<p>这个操作非常直观，只需要从给定的节点开始一直向其left child前进即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minimum</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> root.left:</span><br><span class="line">        root = root.left</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
-<h3 id="maximum">maximum</h3>
-<p>这个操作与minimum相反，只需要从给定的节点开始一直向其right child前进即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maximum</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> root.right:</span><br><span class="line">        root = root.right</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
-<h3 id="predecessor">predecessor</h3>
-<p>定义：所谓predecessor即在BST的中序遍历中，其中某一<strong>非首序</strong>节点的<strong>前</strong>一节点。特殊地，首序节点的predecessor不存在。</p>
+<h3 id="minimum"><a href="#minimum" class="headerlink" title="minimum"></a>minimum</h3><p>这个操作非常直观，只需要从给定的节点开始一直向其left child前进即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">minimum</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="keyword">while</span> root.left:</div><div class="line">        root = root.left</div><div class="line">    <span class="keyword">return</span> root</div></pre></td></tr></table></figure>
+<h3 id="maximum"><a href="#maximum" class="headerlink" title="maximum"></a>maximum</h3><p>这个操作与minimum相反，只需要从给定的节点开始一直向其right child前进即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maximum</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="keyword">while</span> root.right:</div><div class="line">        root = root.right</div><div class="line">    <span class="keyword">return</span> root</div></pre></td></tr></table></figure>
+<h3 id="predecessor"><a href="#predecessor" class="headerlink" title="predecessor"></a>predecessor</h3><p>定义：所谓predecessor即在BST的中序遍历中，其中某一<strong>非首序</strong>节点的<strong>前</strong>一节点。特殊地，首序节点的predecessor不存在。</p>
 <p>寻找一个节点的predecessor有两种情况：</p>
-<ol style="list-style-type: decimal">
+<ol>
 <li>节点x存在左子树</li>
 <li>节点x<strong>不</strong>存在左子树</li>
 </ol>
 <p>如下图所示：</p>
-<div class="figure">
-<img src="http://ww2.sinaimg.cn/mw690/618a6a81gw1f4d5riplg2j20qy0lw75i.jpg" alt="fig4">
-<p class="caption">fig4</p>
-</div>
+<p><img src="http://ww2.sinaimg.cn/mw690/618a6a81gw1f4d5riplg2j20qy0lw75i.jpg" alt="fig4"></p>
 <p>其中节点A为情况1，而节点B为情况2.</p>
 <p>对于节点A这种存在左子树的情况，根据定义，其predecessor为其左子树中key最大的节点。<strong>找到这个predecessor节点的方法很简单，只需要找到A的左子树中最大的（最右边的）那个节点即可。</strong></p>
 <p>而对于不存在左子树的情况，若x节点存在一个predecessor节点y，那么y是x的满足这样一个条件的ancestors中高度最低的一个ancestor：这个条件是y.right也是x的一个ancestor(或parent)。<strong>要找到这个predecessor节点，需要从节点B开始向上，直到遇到第一个是其父节点right child的节点为止，记这个节点为F，则节点B的predecessor就是这是这个节点的父节点，即F.parent是也。</strong></p>
 <p>代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predecessor</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x.left:</span><br><span class="line">        <span class="keyword">return</span> maximum(x.left)</span><br><span class="line">    y = x.parent</span><br><span class="line">    <span class="keyword">while</span> y <span class="keyword">and</span> x == y.left:</span><br><span class="line">        x = y</span><br><span class="line">        y = y.parent <span class="comment"># seems y = x.parent is also ok here</span></span><br><span class="line">    <span class="keyword">return</span> y</span><br></pre></td></tr></table></figure>
-<h3 id="successor">successor</h3>
-<p>定义：所谓successor即在BST的中序遍历中，其中某一<strong>非末序</strong>节点的<strong>后</strong>一节点。特殊地，末序节点的successor不存在。(<em>其实successor的定义与predecessor恰好镜像</em>)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predecessor</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">if</span> x.left:</div><div class="line">        <span class="keyword">return</span> maximum(x.left)</div><div class="line">    y = x.parent</div><div class="line">    <span class="keyword">while</span> y <span class="keyword">and</span> x == y.left:</div><div class="line">        x = y</div><div class="line">        y = y.parent <span class="comment"># seems y = x.parent is also ok here</span></div><div class="line">    <span class="keyword">return</span> y</div></pre></td></tr></table></figure>
+<h3 id="successor"><a href="#successor" class="headerlink" title="successor"></a>successor</h3><p>定义：所谓successor即在BST的中序遍历中，其中某一<strong>非末序</strong>节点的<strong>后</strong>一节点。特殊地，末序节点的successor不存在。(<em>其实successor的定义与predecessor恰好镜像</em>)</p>
 <p>根据定义，寻找一个节点的successor有两种情况：</p>
-<ol style="list-style-type: decimal">
+<ol>
 <li>节点x存在右子树</li>
 <li>节点x<strong>不</strong>存在右子树</li>
 </ol>
 <p>如下图所示：</p>
-<div class="figure">
-<img src="http://ww1.sinaimg.cn/mw690/618a6a81gw1f4d5rzaz05j20qs0lsdh0.jpg" alt="fig5">
-<p class="caption">fig5</p>
-</div>
+<p><img src="http://ww1.sinaimg.cn/mw690/618a6a81gw1f4d5rzaz05j20qs0lsdh0.jpg" alt="fig5"></p>
 <p>其中节点A为情况1，而节点B为情况2.</p>
 <p>对于节点A这种存在右子树的情况，根据定义，其successor为其右子树中key最小的节点。<strong>找到这个successor节点的方法很简单，只需要找到A的右子树中最小的（最左边的）那个节点即可。</strong></p>
 <p>而对于不存在右子树的情况，若x节点存在一个successorr节点y，那么y是x的满足这样一个条件的ancestors中高度最低的一个ancestor：这个条件是y.left也是x的一个ancestor(或parent)。<strong>要找到这个successor节点，需要从节点B开始向上，直到遇到第一个是其父节点left child的节点为止，记这个节点为F，则节点B的successor就是这是这个节点的父节点，即F.parent是也。</strong></p>
 <p>代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">successor</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x.right:</span><br><span class="line">        <span class="keyword">return</span> minimum(x.right)</span><br><span class="line">    y = x.parent</span><br><span class="line">    <span class="keyword">while</span> y <span class="keyword">and</span> x == y.right:</span><br><span class="line">        x = y</span><br><span class="line">        y = y.parent <span class="comment"># seems y = x.parent is also ok here</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">successor</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">if</span> x.right:</div><div class="line">        <span class="keyword">return</span> minimum(x.right)</div><div class="line">    y = x.parent</div><div class="line">    <span class="keyword">while</span> y <span class="keyword">and</span> x == y.right:</div><div class="line">        x = y</div><div class="line">        y = y.parent <span class="comment"># seems y = x.parent is also ok here</span></div></pre></td></tr></table></figure>
 <p>以上就是BST种的基本五种查询操作。</p>
 
       
@@ -611,7 +570,7 @@ BST，二">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -619,7 +578,7 @@ BST，二">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -628,7 +587,7 @@ BST，二">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -636,13 +595,6 @@ BST，二">
 
         </nav>
 
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
         
 
         <div class="links-of-author motion-element">
@@ -699,7 +651,7 @@ BST，二">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内容提要"><span class="nav-number">1.</span> <span class="nav-text">内容提要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bst的基本概念"><span class="nav-number">2.</span> <span class="nav-text">BST的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#典型bst节点"><span class="nav-number">2.1.</span> <span class="nav-text">典型BST节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bst性质"><span class="nav-number">2.2.</span> <span class="nav-text">BST性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的遍历"><span class="nav-number">2.3.</span> <span class="nav-text">树的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前序遍历preorder-tree-walk"><span class="nav-number">2.3.1.</span> <span class="nav-text">前序遍历(preorder tree walk)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中序遍历inorder-tree-walk"><span class="nav-number">2.3.2.</span> <span class="nav-text">中序遍历(inorder tree walk)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后序遍历postorder-tree-walk"><span class="nav-number">2.3.3.</span> <span class="nav-text">后序遍历(postorder tree walk)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#common-feature"><span class="nav-number">2.3.4.</span> <span class="nav-text">common feature</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bst的查询"><span class="nav-number">3.</span> <span class="nav-text">BST的查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">3.1.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#minimum"><span class="nav-number">3.2.</span> <span class="nav-text">minimum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maximum"><span class="nav-number">3.3.</span> <span class="nav-text">maximum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#predecessor"><span class="nav-number">3.4.</span> <span class="nav-text">predecessor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#successor"><span class="nav-number">3.5.</span> <span class="nav-text">successor</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内容提要"><span class="nav-number">1.</span> <span class="nav-text">内容提要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BST的基本概念"><span class="nav-number">2.</span> <span class="nav-text">BST的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#典型BST节点"><span class="nav-number">2.1.</span> <span class="nav-text">典型BST节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BST性质"><span class="nav-number">2.2.</span> <span class="nav-text">BST性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的遍历"><span class="nav-number">2.3.</span> <span class="nav-text">树的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前序遍历-preorder-tree-walk"><span class="nav-number">2.3.1.</span> <span class="nav-text">前序遍历(preorder tree walk)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中序遍历-inorder-tree-walk"><span class="nav-number">2.3.2.</span> <span class="nav-text">中序遍历(inorder tree walk)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后序遍历-postorder-tree-walk"><span class="nav-number">2.3.3.</span> <span class="nav-text">后序遍历(postorder tree walk)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#common-feature"><span class="nav-number">2.3.4.</span> <span class="nav-text">common feature</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BST的查询"><span class="nav-number">3.</span> <span class="nav-text">BST的查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">3.1.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#minimum"><span class="nav-number">3.2.</span> <span class="nav-text">minimum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maximum"><span class="nav-number">3.3.</span> <span class="nav-text">maximum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#predecessor"><span class="nav-number">3.4.</span> <span class="nav-text">predecessor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#successor"><span class="nav-number">3.5.</span> <span class="nav-text">successor</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -718,7 +670,7 @@ BST，二">
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-paper-plane" aria-hidden="true"></i>
   </span>
@@ -965,7 +917,7 @@ BST，二">
         showTime(Counter);
       }
     });
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
 
 

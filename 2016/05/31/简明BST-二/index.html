@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion">
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -64,13 +64,11 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="alogrithm,BST," />
+  <meta name="keywords" content="BST,alogrithm," />
 
 
 
 
-
-  <link rel="alternate" href="/atom.xml" title="品森" type="application/atom+xml" />
 
 
 
@@ -82,30 +80,26 @@
 
 
 
-<meta name="description" content="内容提要
-本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
+<meta name="description" content="内容提要本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
 
 BST(Binary Search Tree)的插入操作
 BST的删除操作
 
 参考书目 CLRS 12.1-12.3
 这篇blog是关于BST的第二部分。前篇blog着重讲BST的基本概念和查询操作，而第三部分主要是各种算法的数学证明。
-BST的插入操作
-插入操作">
+BST的插入操作插入操作的原">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简明BST(二)">
 <meta property="og:url" content="http://spencerpomme.github.io/2016/05/31/简明BST-二/index.html">
 <meta property="og:site_name" content="品森">
-<meta property="og:description" content="内容提要
-本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
+<meta property="og:description" content="内容提要本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
 
 BST(Binary Search Tree)的插入操作
 BST的删除操作
 
 参考书目 CLRS 12.1-12.3
 这篇blog是关于BST的第二部分。前篇blog着重讲BST的基本概念和查询操作，而第三部分主要是各种算法的数学证明。
-BST的插入操作
-插入操作">
+BST的插入操作插入操作的原">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/618a6a81gw1f4gowgl970j208s05zdfz.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/618a6a81gw1f4gp9o0f7bj209g05vwel.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/618a6a81gw1f4h6hnj4otj204u081wei.jpg">
@@ -116,16 +110,14 @@ BST的插入操作
 <meta property="og:updated_time" content="2016-06-16T02:18:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简明BST(二)">
-<meta name="twitter:description" content="内容提要
-本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
+<meta name="twitter:description" content="内容提要本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：
 
 BST(Binary Search Tree)的插入操作
 BST的删除操作
 
 参考书目 CLRS 12.1-12.3
 这篇blog是关于BST的第二部分。前篇blog着重讲BST的基本概念和查询操作，而第三部分主要是各种算法的数学证明。
-BST的插入操作
-插入操作">
+BST的插入操作插入操作的原">
 <meta name="twitter:image" content="http://ww4.sinaimg.cn/large/618a6a81gw1f4gowgl970j208s05zdfz.jpg">
 
 
@@ -144,7 +136,7 @@ BST的插入操作
   };
 </script>
 
-  <title> 简明BST(二) | 品森 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 简明BST(二) | 品森 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -155,7 +147,7 @@ BST的插入操作
 
 
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+  <script type="text/javascript">
     (function() {
       var hm = document.createElement("script");
       hm.src = "//tajs.qq.com/stats?sId=55666090";
@@ -368,100 +360,67 @@ BST的插入操作
       
 
       
-        <h2 id="内容提要">内容提要</h2>
-<p>本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：</p>
-<ol style="list-style-type: decimal">
+        <h2 id="内容提要"><a href="#内容提要" class="headerlink" title="内容提要"></a>内容提要</h2><p>本文为学习MIT6.006 lecture5和阅读CLRS chapter12的基础上消化理解而来。主要内容包括以下部分：</p>
+<ol>
 <li>BST(Binary Search Tree)的插入操作</li>
 <li>BST的删除操作</li>
 </ol>
 <p><em>参考书目 CLRS 12.1-12.3</em></p>
 <p>这篇blog是关于BST的第二部分。前篇blog着重讲BST的基本概念和查询操作，而第三部分主要是各种算法的数学证明。</p>
-<h2 id="bst的插入操作">BST的插入操作</h2>
-<h3 id="插入操作的原理">插入操作的原理</h3>
-<p>向BST中插入新节点相对来说比较简单，主要分为两个步骤：</p>
-<ol style="list-style-type: decimal">
+<h2 id="BST的插入操作"><a href="#BST的插入操作" class="headerlink" title="BST的插入操作"></a>BST的插入操作</h2><h3 id="插入操作的原理"><a href="#插入操作的原理" class="headerlink" title="插入操作的原理"></a>插入操作的原理</h3><p>向BST中插入新节点相对来说比较简单，主要分为两个步骤：</p>
+<ol>
 <li>通过二分查找找到一个合适的位置去加入新节点，这个<strong>合适的位置</strong>总会是一个leaf节点；</li>
 <li>比较插入节点的key值与目标leaf节点的key值来决定插入的新节点是leaf节点的left child还是right child.</li>
 </ol>
 <p>代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">treeNode</span>:</span></span><br><span class="line">    <span class="string">"""</span><br><span class="line">    BST node definition</span><br><span class="line">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        self.key = key</span><br><span class="line">        self.parent = <span class="keyword">None</span></span><br><span class="line">        self.right = <span class="keyword">None</span></span><br><span class="line">        self.left = <span class="keyword">None</span></span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(root, node)</span>:</span></span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line">    x = root</span><br><span class="line">    <span class="keyword">while</span> x:</span><br><span class="line">        y = x</span><br><span class="line">        <span class="keyword">if</span> node.key &lt; x.key:</span><br><span class="line">            x = x.left</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            x = x.right</span><br><span class="line">    node.parent = y</span><br><span class="line">    <span class="keyword">if</span> node.key &lt; y.key:</span><br><span class="line">        y.left = node</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        y.right = node</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">treeNode</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    BST node definition</div><div class="line">    """</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, key)</span>:</span></div><div class="line">        self.key = key</div><div class="line">        self.parent = <span class="keyword">None</span></div><div class="line">        self.right = <span class="keyword">None</span></div><div class="line">        self.left = <span class="keyword">None</span></div><div class="line">        </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(root, node)</span>:</span></div><div class="line">    y = <span class="keyword">None</span></div><div class="line">    x = root</div><div class="line">    <span class="keyword">while</span> x:</div><div class="line">        y = x</div><div class="line">        <span class="keyword">if</span> node.key &lt; x.key:</div><div class="line">            x = x.left</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            x = x.right</div><div class="line">    node.parent = y</div><div class="line">    <span class="keyword">if</span> node.key &lt; y.key:</div><div class="line">        y.left = node</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        y.right = node</div></pre></td></tr></table></figure>
 <p>举个例子，下图这棵BST插入一个新节点，结果会到哪里去呢？</p>
-<div class="figure">
-<img src="http://ww4.sinaimg.cn/large/618a6a81gw1f4gowgl970j208s05zdfz.jpg" alt="fig.1">
-<p class="caption">fig.1</p>
-</div>
+<p><img src="http://ww4.sinaimg.cn/large/618a6a81gw1f4gowgl970j208s05zdfz.jpg" alt="fig.1"></p>
 <p>通过上述的插入算法，最终新节点会在一个合适的位置成为一个新的leaf节点。</p>
-<div class="figure">
-<img src="http://ww4.sinaimg.cn/large/618a6a81gw1f4gp9o0f7bj209g05vwel.jpg" alt="fig.2">
-<p class="caption">fig.2</p>
-</div>
-<h3 id="潜在的问题">潜在的问题</h3>
-<p>然而这样的做法有一个几乎是必然发生的不良后果，就是随着不断插入新的节点，BST会逐渐失去平衡，最后树的深度不再是$O(\lg n)$ 而是<span class="math inline">\(O(n)\)</span>了。关于这个问题的解决方法，在学习AVL平衡的时候会进行归纳总结。</p>
-<h2 id="bst的删除操作">BST的删除操作</h2>
-<p>从BST中删除一个节点，是BST的基本操作中，相对来说最复杂和需要花时间理解的部分。归纳地看，从BST中删除节点分为三种基本情况(base case)，算上sub case则总共有四种可能面对的情况出现。前两种base case比较简单和直观，而第三种情况需要额外考虑，且其一个sub case则更为复杂。</p>
-<h3 id="trivial-case">Trivial case</h3>
-<p>这种情况是最简单的，就是打算从BST中删除的节点<strong>恰好是leaf节点</strong>。之所以简单是因为leaf的做右子树<strong>都是空的</strong>，不需要考虑删除这个节点后其左右子树的移植问题。如下图：</p>
-<div class="figure">
-<img src="http://ww1.sinaimg.cn/large/618a6a81gw1f4h6hnj4otj204u081wei.jpg" alt="fig.3">
-<p class="caption">fig.3</p>
-</div>
-<p>图中的<span class="math inline">\(x\)</span>节点就是要被从BST中删掉的节点。代码也很简单，如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x == x.parent.left:</span><br><span class="line">    x.parent.left = <span class="keyword">None</span></span><br><span class="line"><span class="keyword">elif</span> x == x.parent.right:</span><br><span class="line">    x.parent.right = <span class="keyword">None</span></span><br><span class="line">x.parent = <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
-<h3 id="easy-case">Easy case</h3>
-<p>接着来看稍微复杂一些但是依然比较简单的情况。这回要删除的节点不是leaf节点了，但是它<strong>只有一个child</strong>，如下图所示：</p>
-<div class="figure">
-<img src="http://ww3.sinaimg.cn/large/618a6a81gw1f4h6x8zfgqj20a906g3z7.jpg" alt="fig.4">
-<p class="caption">fig.4</p>
-</div>
-<p>图中的<span class="math inline">\(x\)</span>节点即要被从BST中删除的节点，而<span class="math inline">\(z\)</span>节点是<span class="math inline">\(x\)</span>的唯一child，可能是左子节点也可能是右子节点。这种情况下只需要用<span class="math inline">\(z\)</span>取代<span class="math inline">\(x\)</span>即可。代码如下(选取左边的情况)：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x == x.parent.left:</span><br><span class="line">    x.parent.left = x.left</span><br><span class="line"><span class="keyword">elif</span> x == x.parent.right:</span><br><span class="line">    x.parent.right = x.left</span><br><span class="line">x.left = x.parent = <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
-<h3 id="normal-case">Normal case</h3>
-<p>在这种情况下，要从BST中删去的节点<strong>会齐备左右两个子树</strong>，这就相对复杂一些了。这种情况又分为两种子情况，我们先从较简单的那种子情况开始说起。</p>
-<h4 id="sub-case-1">sub case 1</h4>
-<p>待删除节点<span class="math inline">\(x\)</span>有左右两个子节点<span class="math inline">\(y\)</span>和<span class="math inline">\(z\)</span>。<strong>同时，<span class="math inline">\(y\)</span>节点为<span class="math inline">\(x\)</span>节点的predecessor（或successor）</strong>节点，或者也可以表述为，<strong><span class="math inline">\(x\)</span>的right child节点<span class="math inline">\(y\)</span>没有left child（或<span class="math inline">\(x\)</span>的left child节点<span class="math inline">\(y\)</span>没有right child）</strong>。如下图fig.5所示。图fig.6是镜像情况。</p>
-<div class="figure">
-<img src="http://ww1.sinaimg.cn/large/618a6a81gw1f4i3hi4spzj206g066glq.jpg" alt="fig.5">
-<p class="caption">fig.5</p>
-</div>
-<div class="figure">
-<img src="http://ww2.sinaimg.cn/large/618a6a81gw1f4i3hpp4h3j206205vmx9.jpg" alt="fig.6">
-<p class="caption">fig.6</p>
-</div>
+<p><img src="http://ww4.sinaimg.cn/large/618a6a81gw1f4gp9o0f7bj209g05vwel.jpg" alt="fig.2"></p>
+<h3 id="潜在的问题"><a href="#潜在的问题" class="headerlink" title="潜在的问题"></a>潜在的问题</h3><p>然而这样的做法有一个几乎是必然发生的不良后果，就是随着不断插入新的节点，BST会逐渐失去平衡，最后树的深度不再是$O(\lg n)$ 而是$O(n)$了。关于这个问题的解决方法，在学习AVL平衡的时候会进行归纳总结。</p>
+<h2 id="BST的删除操作"><a href="#BST的删除操作" class="headerlink" title="BST的删除操作"></a>BST的删除操作</h2><p>从BST中删除一个节点，是BST的基本操作中，相对来说最复杂和需要花时间理解的部分。归纳地看，从BST中删除节点分为三种基本情况(base case)，算上sub case则总共有四种可能面对的情况出现。前两种base case比较简单和直观，而第三种情况需要额外考虑，且其一个sub case则更为复杂。</p>
+<h3 id="Trivial-case"><a href="#Trivial-case" class="headerlink" title="Trivial case"></a>Trivial case</h3><p>这种情况是最简单的，就是打算从BST中删除的节点<strong>恰好是leaf节点</strong>。之所以简单是因为leaf的做右子树<strong>都是空的</strong>，不需要考虑删除这个节点后其左右子树的移植问题。如下图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/618a6a81gw1f4h6hnj4otj204u081wei.jpg" alt="fig.3"></p>
+<p>图中的$x$节点就是要被从BST中删掉的节点。代码也很简单，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> x == x.parent.left:</div><div class="line">    x.parent.left = <span class="keyword">None</span></div><div class="line"><span class="keyword">elif</span> x == x.parent.right:</div><div class="line">    x.parent.right = <span class="keyword">None</span></div><div class="line">x.parent = <span class="keyword">None</span></div></pre></td></tr></table></figure>
+<h3 id="Easy-case"><a href="#Easy-case" class="headerlink" title="Easy case"></a>Easy case</h3><p>接着来看稍微复杂一些但是依然比较简单的情况。这回要删除的节点不是leaf节点了，但是它<strong>只有一个child</strong>，如下图所示：</p>
+<p><img src="http://ww3.sinaimg.cn/large/618a6a81gw1f4h6x8zfgqj20a906g3z7.jpg" alt="fig.4"></p>
+<p>图中的$x$节点即要被从BST中删除的节点，而$z$节点是$x$的唯一child，可能是左子节点也可能是右子节点。这种情况下只需要用$z$取代$x$即可。代码如下(选取左边的情况)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> x == x.parent.left:</div><div class="line">    x.parent.left = x.left</div><div class="line"><span class="keyword">elif</span> x == x.parent.right:</div><div class="line">    x.parent.right = x.left</div><div class="line">x.left = x.parent = <span class="keyword">None</span></div></pre></td></tr></table></figure>
+<h3 id="Normal-case"><a href="#Normal-case" class="headerlink" title="Normal case"></a>Normal case</h3><p>在这种情况下，要从BST中删去的节点<strong>会齐备左右两个子树</strong>，这就相对复杂一些了。这种情况又分为两种子情况，我们先从较简单的那种子情况开始说起。</p>
+<h4 id="sub-case-1"><a href="#sub-case-1" class="headerlink" title="sub case 1"></a>sub case 1</h4><p>待删除节点$x$有左右两个子节点$y$和$z$。<strong>同时，$y$节点为$x$节点的predecessor（或successor）</strong>节点，或者也可以表述为，<strong>$x$的right child节点$y$没有left child（或$x$的left child节点$y$没有right child）</strong>。如下图fig.5所示。图fig.6是镜像情况。</p>
+<p><img src="http://ww1.sinaimg.cn/large/618a6a81gw1f4i3hi4spzj206g066glq.jpg" alt="fig.5"></p>
+<p><img src="http://ww2.sinaimg.cn/large/618a6a81gw1f4i3hpp4h3j206205vmx9.jpg" alt="fig.6"></p>
 <p>BST的删除操作必须要保证在删除节点之后整棵树仍然保持BST的性质，所以当遇到被删除节点兼有左右子树的时候，就需要保证删除并调整结构后，不会与BST性质冲突。</p>
-<p>这个时候的策略就是<strong>从<span class="math inline">\(x\)</span>节点的做右子树中选择一个合适的节点来代替<span class="math inline">\(x\)</span>节点</strong>（successor method）或者<strong>从<span class="math inline">\(x\)</span>节点的左子树中选择一个合适的节点来代替<span class="math inline">\(x\)</span>节点</strong>(predecessor method）。</p>
-<p>其实看到这里应该会产生一个疑问，如果你产生了这个疑问那么说明我不是一个人。那就是：<strong>为什么在定义一个BST节点的时候有三个指向其它节点的指针(pointer)，即parent，left，right三个，为什么不考虑一下<span class="math inline">\(x\)</span>的父节点是否可以直接替代被删掉了的<span class="math inline">\(x\)</span>节点呢？</strong></p>
-<p>其实这只是一个思考角度的不同而已。譬如在easy case中，也可以看作是<span class="math inline">\(x\)</span>的parent节点替代了<span class="math inline">\(x\)</span>，这与认为是<span class="math inline">\(x\)</span>的left child或right child替代了<span class="math inline">\(x\)</span><strong>实际上是等价的</strong>。之所以不这样考虑，是因为考虑到整棵BST的root节点没有parent节点，为了不需要额外考虑一个corner case，简便起见就只讨论从<span class="math inline">\(x\)</span>的左子树和右子树中选择替代<span class="math inline">\(x\)</span>的节点的情况了。关于这一点就解释到这里，<strong>下面看一下具体应该怎样做</strong>：</p>
-<ol style="list-style-type: decimal">
-<li>当<span class="math inline">\(y\)</span>是<span class="math inline">\(x\)</span>的<strong>right child</strong>且<span class="math inline">\(y\)</span>是<span class="math inline">\(x\)</span>的<strong>successor</strong>时，用<span class="math inline">\(y\)</span>取代<span class="math inline">\(x\)</span>，同时让<span class="math inline">\(x\)</span>的left child成为<span class="math inline">\(y\)</span>的left child；</li>
-<li>当<span class="math inline">\(y\)</span>是<span class="math inline">\(x\)</span>的<strong>left child</strong>且<span class="math inline">\(y\)</span>是<span class="math inline">\(x\)</span>的<strong>predecessor</strong>时，用<span class="math inline">\(y\)</span>取代<span class="math inline">\(x\)</span>，同时让<span class="math inline">\(x\)</span>的right child成为<span class="math inline">\(y\)</span>的right child；</li>
+<p>这个时候的策略就是<strong>从$x$节点的做右子树中选择一个合适的节点来代替$x$节点</strong>（successor method）或者<strong>从$x$节点的左子树中选择一个合适的节点来代替$x$节点</strong>(predecessor method）。</p>
+<p>其实看到这里应该会产生一个疑问，如果你产生了这个疑问那么说明我不是一个人。那就是：<strong>为什么在定义一个BST节点的时候有三个指向其它节点的指针(pointer)，即parent，left，right三个，为什么不考虑一下$x$的父节点是否可以直接替代被删掉了的$x$节点呢？</strong></p>
+<p>其实这只是一个思考角度的不同而已。譬如在easy case中，也可以看作是$x$的parent节点替代了$x$，这与认为是$x$的left child或right child替代了$x$<strong>实际上是等价的</strong>。之所以不这样考虑，是因为考虑到整棵BST的root节点没有parent节点，为了不需要额外考虑一个corner case，简便起见就只讨论从$x$的左子树和右子树中选择替代$x$的节点的情况了。关于这一点就解释到这里，<strong>下面看一下具体应该怎样做</strong>：</p>
+<ol>
+<li>当$y$是$x$的<strong>right child</strong>且$y$是$x$的<strong>successor</strong>时，用$y$取代$x$，同时让$x$的left child成为$y$的left child；</li>
+<li>当$y$是$x$的<strong>left child</strong>且$y$是$x$的<strong>predecessor</strong>时，用$y$取代$x$，同时让$x$的right child成为$y$的right child；</li>
 </ol>
 <p>为了把BST中的子树可以在BST中到处移动，可以定义一个<code>transplant</code>函数。此外还需要为BST简单定义一个ADT(abstract data type)，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BST</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="string">"""</span><br><span class="line">        One of the most simplified BST ADT.</span><br><span class="line">        root is a treeNode object.</span><br><span class="line">        """</span></span><br><span class="line">        self.root = root</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transplant</span><span class="params">(T, u, v)</span>:</span></span><br><span class="line">    <span class="string">"""</span><br><span class="line">    This function replace node u with node v in a BST T.</span><br><span class="line">    Both u and v are references to a treeNode object</span><br><span class="line">    """</span></span><br><span class="line">    <span class="keyword">if</span> u.parent == <span class="keyword">None</span>:</span><br><span class="line">        T.root = v</span><br><span class="line">    <span class="keyword">elif</span> u == u.parent.left:</span><br><span class="line">        u.parent.left = v</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        u.parent.right = v</span><br><span class="line">    <span class="keyword">if</span> v:</span><br><span class="line">        v.parent = u.parent</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BST</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        One of the most simplified BST ADT.</div><div class="line">        root is a treeNode object.</div><div class="line">        """</div><div class="line">        self.root = root</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">transplant</span><span class="params">(T, u, v)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    This function replace node u with node v in a BST T.</div><div class="line">    Both u and v are references to a treeNode object</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> u.parent == <span class="keyword">None</span>:</div><div class="line">        T.root = v</div><div class="line">    <span class="keyword">elif</span> u == u.parent.left:</div><div class="line">        u.parent.left = v</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        u.parent.right = v</div><div class="line">    <span class="keyword">if</span> v:</div><div class="line">        v.parent = u.parent</div></pre></td></tr></table></figure>
 <p>有了<code>transplant</code>函数，实现前边所说的sub case 1就比较容易了。代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># for case showed in fig.5, predecessor method</span></span><br><span class="line">y = maximum(x.left)</span><br><span class="line"><span class="keyword">if</span> y.parent == x: <span class="comment"># in this case evaluates true</span></span><br><span class="line">    transplant(T, x, y)</span><br><span class="line">    y.right = x.right</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># for case showed in fig.6, successor method</span></span><br><span class="line">y = minimum(x.right)</span><br><span class="line"><span class="keyword">if</span> y.parent == x: <span class="comment"># in this case evaluates true</span></span><br><span class="line">    transplant(T, x, y)</span><br><span class="line">    y.left = x.left</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># for case showed in fig.5, predecessor method</span></div><div class="line">y = maximum(x.left)</div><div class="line"><span class="keyword">if</span> y.parent == x: <span class="comment"># in this case evaluates true</span></div><div class="line">    transplant(T, x, y)</div><div class="line">    y.right = x.right</div><div class="line">    </div><div class="line">    </div><div class="line"><span class="comment"># for case showed in fig.6, successor method</span></div><div class="line">y = minimum(x.right)</div><div class="line"><span class="keyword">if</span> y.parent == x: <span class="comment"># in this case evaluates true</span></div><div class="line">    transplant(T, x, y)</div><div class="line">    y.left = x.left</div></pre></td></tr></table></figure>
 <p>解决了这种情况，最后来看一下最复杂的那种情况。</p>
-<h4 id="sub-case-2-the-tricky-case">sub case 2 (The tricky case)</h4>
-<p>先来看一张图：</p>
-<div class="figure">
-<img src="http://ww1.sinaimg.cn/large/618a6a81gw1f4ib2kh3jxj206h07d3yp.jpg" alt="fig.7">
-<p class="caption">fig.7</p>
-</div>
+<h4 id="sub-case-2-The-tricky-case"><a href="#sub-case-2-The-tricky-case" class="headerlink" title="sub case 2 (The tricky case)"></a>sub case 2 (The tricky case)</h4><p>先来看一张图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/618a6a81gw1f4ib2kh3jxj206h07d3yp.jpg" alt="fig.7"></p>
 <p>这里以<strong>successor来取代被删除节点</strong>的情况作为例子，用predecessor的情况是其镜像，略。</p>
-<p>可以发现，<span class="math inline">\(x\)</span>节点有左右两个子节点（这一点与sub case 1相同），但是，节点<span class="math inline">\(y\)</span>不是<span class="math inline">\(x\)</span>的direct child（这一点与sub case 1不同）。通过观察可以发现，<span class="math inline">\(x\)</span>的successor节点<span class="math inline">\(y\)</span>d的left child为空。（这是必然的，回想一下就知道，<span class="math inline">\(y\)</span> = minimum(<span class="math inline">\(x\)</span>.left)，既然<span class="math inline">\(y\)</span>是<span class="math inline">\(x\)</span>右子树中key最小的节点，其必然没有left child）</p>
-<p>待删除的节点是<span class="math inline">\(x\)</span>，实质上是用<span class="math inline">\(y\)</span>节点来取代<span class="math inline">\(x\)</span>，换句话说就是把<span class="math inline">\(y\)</span>从原来的位置<strong>移除</strong>，然后<strong>放置到<span class="math inline">\(x\)</span>的位置</strong>。可见，对于sub case 2来说，要进行三步操作：</p>
-<ol style="list-style-type: decimal">
-<li>找到<span class="math inline">\(x\)</span>的successor节点<span class="math inline">\(y\)</span></li>
-<li>把<span class="math inline">\(y\)</span>从BST中暂时删除</li>
-<li>用<span class="math inline">\(y\)</span>==节点==替换<span class="math inline">\(x\)</span>==节点==，而<strong>不是仅仅把<span class="math inline">\(y\)</span>.key复制到<span class="math inline">\(x\)</span>.key中</strong></li>
+<p>可以发现，$x$节点有左右两个子节点（这一点与sub case 1相同），但是，节点$y$不是$x$的direct child（这一点与sub case 1不同）。通过观察可以发现，$x$的successor节点$y$d的left child为空。（这是必然的，回想一下就知道，$y$ = minimum($x$.left)，既然$y$是$x$右子树中key最小的节点，其必然没有left child）</p>
+<p>待删除的节点是$x$，实质上是用$y$节点来取代$x$，换句话说就是把$y$从原来的位置<strong>移除</strong>，然后<strong>放置到$x$的位置</strong>。可见，对于sub case 2来说，要进行三步操作：</p>
+<ol>
+<li>找到$x$的successor节点$y$</li>
+<li>把$y$从BST中暂时删除</li>
+<li>用$y$==节点==替换$x$==节点==，而<strong>不是仅仅把$y$.key复制到$x$.key中</strong></li>
 </ol>
-<p>分析上述三个步骤，可以发现，第一步其实是对<span class="math inline">\(x\)</span>节点调用<code>successor</code>函数；第二步则是删除节点的easy case；第三步则是以<span class="math inline">\(x\)</span>为<strong>被</strong>替代节点，以从BST中剥离出来的<span class="math inline">\(y\)</span>节点为替代节点，调用<code>transplant</code>函数。综上，sub case 2的代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">y = minimum(x.right)</span><br><span class="line"><span class="keyword">if</span> y.parent != x: <span class="comment"># in this case evaluates true</span></span><br><span class="line">    transplant(T, y, y.right)</span><br><span class="line">    y.left = x.left</span><br><span class="line">    y.right = x.right</span><br><span class="line">    y.left.parent = y</span><br><span class="line">    y.right.parent = y</span><br></pre></td></tr></table></figure>
-<p>上述代码的第1行找到待删除节点<span class="math inline">\(x\)</span>的successor节点<span class="math inline">\(y\)</span>，第2行判断<span class="math inline">\(y\)</span>并非<span class="math inline">\(x\)</span>的direct child，第3行将<span class="math inline">\(y\)</span>临时从BST中移出（即用<span class="math inline">\(y\)</span>.right代替<span class="math inline">\(y\)</span>），第4行到第7行用<span class="math inline">\(y\)</span>替代<span class="math inline">\(x\)</span>%。</p>
-<h3 id="final-code">Final code</h3>
-<p>仔细分析了BST删除节点操作的三种情况后，把代码综合起来就是<code>delete</code>函数的完整代码了。通常来说<strong>为了简便起见，在删除节点时，对于normal case只查看被删除节点一侧子树</strong>。至于trivial case实际上是easy case的一种特殊情况，在整合的代码里已经隐含在easy case的判断条件中了。本文采取predecessor method，CLRS中采用了successor method，感兴趣可以自己翻书对比。代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BSTdelete</span><span class="params">(T, z)</span>:</span></span><br><span class="line">    <span class="string">"""</span><br><span class="line">    T is the concerned BST ADT and z is the to be deleted node.</span><br><span class="line">    This function uses predecessor finding based method.</span><br><span class="line">    """</span></span><br><span class="line">    <span class="keyword">if</span> z.left == <span class="keyword">None</span>:</span><br><span class="line">        transplant(T, z, z.right)</span><br><span class="line">    <span class="keyword">elif</span> z.right == <span class="keyword">None</span>:</span><br><span class="line">        transplant(T, z, z.left)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        y = maximum(z.left)</span><br><span class="line">        <span class="keyword">if</span> y.parent != z:</span><br><span class="line">            transplant(T, y, y.left)</span><br><span class="line">            y.left = z.left</span><br><span class="line">            y.left.parent = y</span><br><span class="line">        transplant(T, z, y)</span><br><span class="line">        y.right = z.right</span><br><span class="line">        y.right.parent = y</span><br></pre></td></tr></table></figure>
-<h2 id="后记">后记</h2>
-<p>可能读者如果细心的话会发现，本文中的python代码虽然实现了将被删除的节点<strong>从BST中移出</strong>的目的，但以python的标准而言，并没有真的销毁这个节点。而且事实上，说将被删除节点从BST中移出也不完全严谨，因为上述代码运行之后，从被删除节点出发，依然可以通过指针访问到BST的其它节点，只不过从BST的其它节点出发<strong>再也访问不到被删除节点</strong>而已。虽然对于洁癖癌来说这个着实令人不爽，但是事实上这样已经满足了BST作为一个ADT的需求了。</p>
+<p>分析上述三个步骤，可以发现，第一步其实是对$x$节点调用<code>successor</code>函数；第二步则是删除节点的easy case；第三步则是以$x$为<strong>被</strong>替代节点，以从BST中剥离出来的$y$节点为替代节点，调用<code>transplant</code>函数。综上，sub case 2的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">y = minimum(x.right)</div><div class="line"><span class="keyword">if</span> y.parent != x: <span class="comment"># in this case evaluates true</span></div><div class="line">    transplant(T, y, y.right)</div><div class="line">    y.left = x.left</div><div class="line">    y.right = x.right</div><div class="line">    y.left.parent = y</div><div class="line">    y.right.parent = y</div></pre></td></tr></table></figure>
+<p>上述代码的第1行找到待删除节点$x$的successor节点$y$，第2行判断$y$并非$x$的direct child，第3行将$y$临时从BST中移出（即用$y$.right代替$y$），第4行到第7行用$y$替代$x$%。</p>
+<h3 id="Final-code"><a href="#Final-code" class="headerlink" title="Final code"></a>Final code</h3><p>仔细分析了BST删除节点操作的三种情况后，把代码综合起来就是<code>delete</code>函数的完整代码了。通常来说<strong>为了简便起见，在删除节点时，对于normal case只查看被删除节点一侧子树</strong>。至于trivial case实际上是easy case的一种特殊情况，在整合的代码里已经隐含在easy case的判断条件中了。本文采取predecessor method，CLRS中采用了successor method，感兴趣可以自己翻书对比。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">BSTdelete</span><span class="params">(T, z)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    T is the concerned BST ADT and z is the to be deleted node.</div><div class="line">    This function uses predecessor finding based method.</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> z.left == <span class="keyword">None</span>:</div><div class="line">        transplant(T, z, z.right)</div><div class="line">    <span class="keyword">elif</span> z.right == <span class="keyword">None</span>:</div><div class="line">        transplant(T, z, z.left)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        y = maximum(z.left)</div><div class="line">        <span class="keyword">if</span> y.parent != z:</div><div class="line">            transplant(T, y, y.left)</div><div class="line">            y.left = z.left</div><div class="line">            y.left.parent = y</div><div class="line">        transplant(T, z, y)</div><div class="line">        y.right = z.right</div><div class="line">        y.right.parent = y</div></pre></td></tr></table></figure>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>可能读者如果细心的话会发现，本文中的python代码虽然实现了将被删除的节点<strong>从BST中移出</strong>的目的，但以python的标准而言，并没有真的销毁这个节点。而且事实上，说将被删除节点从BST中移出也不完全严谨，因为上述代码运行之后，从被删除节点出发，依然可以通过指针访问到BST的其它节点，只不过从BST的其它节点出发<strong>再也访问不到被删除节点</strong>而已。虽然对于洁癖癌来说这个着实令人不爽，但是事实上这样已经满足了BST作为一个ADT的需求了。</p>
 <p>若要进一步彻底将在内存中的这个节点删掉，还需要一些额外的步骤，也就是被删除节点的所有指针置为<code>None</code>并删掉节点变量名令其被garbage collect（或在C语言中，显式地调用<code>free</code>函数）。</p>
 
       
@@ -483,9 +442,9 @@ BST的插入操作
       
         <div class="post-tags">
           
-            <a href="/tags/alogrithm/" rel="tag">#alogrithm</a>
-          
             <a href="/tags/BST/" rel="tag">#BST</a>
+          
+            <a href="/tags/alogrithm/" rel="tag">#alogrithm</a>
           
         </div>
       
@@ -501,6 +460,10 @@ BST的插入操作
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/29/AVL-1/" rel="prev" title="AVL(1)">
+                AVL(1) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -591,7 +554,7 @@ BST的插入操作
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -599,7 +562,7 @@ BST的插入操作
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -608,7 +571,7 @@ BST的插入操作
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -616,13 +579,6 @@ BST的插入操作
 
         </nav>
 
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
         
 
         <div class="links-of-author motion-element">
@@ -679,7 +635,7 @@ BST的插入操作
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内容提要"><span class="nav-number">1.</span> <span class="nav-text">内容提要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bst的插入操作"><span class="nav-number">2.</span> <span class="nav-text">BST的插入操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入操作的原理"><span class="nav-number">2.1.</span> <span class="nav-text">插入操作的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#潜在的问题"><span class="nav-number">2.2.</span> <span class="nav-text">潜在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bst的删除操作"><span class="nav-number">3.</span> <span class="nav-text">BST的删除操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#trivial-case"><span class="nav-number">3.1.</span> <span class="nav-text">Trivial case</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easy-case"><span class="nav-number">3.2.</span> <span class="nav-text">Easy case</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#normal-case"><span class="nav-number">3.3.</span> <span class="nav-text">Normal case</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sub-case-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">sub case 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sub-case-2-the-tricky-case"><span class="nav-number">3.3.2.</span> <span class="nav-text">sub case 2 (The tricky case)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final-code"><span class="nav-number">3.4.</span> <span class="nav-text">Final code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内容提要"><span class="nav-number">1.</span> <span class="nav-text">内容提要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BST的插入操作"><span class="nav-number">2.</span> <span class="nav-text">BST的插入操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入操作的原理"><span class="nav-number">2.1.</span> <span class="nav-text">插入操作的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#潜在的问题"><span class="nav-number">2.2.</span> <span class="nav-text">潜在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BST的删除操作"><span class="nav-number">3.</span> <span class="nav-text">BST的删除操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Trivial-case"><span class="nav-number">3.1.</span> <span class="nav-text">Trivial case</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Easy-case"><span class="nav-number">3.2.</span> <span class="nav-text">Easy case</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal-case"><span class="nav-number">3.3.</span> <span class="nav-text">Normal case</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sub-case-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">sub case 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sub-case-2-The-tricky-case"><span class="nav-number">3.3.2.</span> <span class="nav-text">sub case 2 (The tricky case)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Final-code"><span class="nav-number">3.4.</span> <span class="nav-text">Final code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
             
           </div>
         </section>
@@ -698,7 +654,7 @@ BST的插入操作
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-paper-plane" aria-hidden="true"></i>
   </span>
@@ -945,7 +901,7 @@ BST的插入操作
         showTime(Counter);
       }
     });
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
 
 
