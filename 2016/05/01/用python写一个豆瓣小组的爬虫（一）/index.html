@@ -1,0 +1,866 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="爬虫," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="用python写一个豆瓣小组的爬虫（一）这是一篇夹杂着大量私货的“技术贴”。
+豆瓣是一个神奇的网站。我大概是在07年的时候知道有豆瓣这个网站，然后在高考之后有一段时间整天泡在上边，每看完一部电影就上去标记为“看过”，写个短评，乐此不疲。豆瓣fm也是一个我非常喜欢的功能，我曾经最喜欢的事情之一就是一边听着私人电台，一边在阿尔法城逛来逛去（后来阿尔法城关掉了）。再写下去就要写成豆瓣的软文了，哈。不过确">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用python写一个豆瓣小组的爬虫（一）">
+<meta property="og:url" content="http://spencerpomme.github.io/2016/05/01/用python写一个豆瓣小组的爬虫（一）/index.html">
+<meta property="og:site_name" content="品森">
+<meta property="og:description" content="用python写一个豆瓣小组的爬虫（一）这是一篇夹杂着大量私货的“技术贴”。
+豆瓣是一个神奇的网站。我大概是在07年的时候知道有豆瓣这个网站，然后在高考之后有一段时间整天泡在上边，每看完一部电影就上去标记为“看过”，写个短评，乐此不疲。豆瓣fm也是一个我非常喜欢的功能，我曾经最喜欢的事情之一就是一边听着私人电台，一边在阿尔法城逛来逛去（后来阿尔法城关掉了）。再写下去就要写成豆瓣的软文了，哈。不过确">
+<meta property="og:image" content="http://spencerpomme.github.io/images/groupiwgf.png">
+<meta property="og:updated_time" content="2016-05-10T15:26:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用python写一个豆瓣小组的爬虫（一）">
+<meta name="twitter:description" content="用python写一个豆瓣小组的爬虫（一）这是一篇夹杂着大量私货的“技术贴”。
+豆瓣是一个神奇的网站。我大概是在07年的时候知道有豆瓣这个网站，然后在高考之后有一段时间整天泡在上边，每看完一部电影就上去标记为“看过”，写个短评，乐此不疲。豆瓣fm也是一个我非常喜欢的功能，我曾经最喜欢的事情之一就是一边听着私人电台，一边在阿尔法城逛来逛去（后来阿尔法城关掉了）。再写下去就要写成豆瓣的软文了，哈。不过确">
+<meta name="twitter:image" content="http://spencerpomme.github.io/images/groupiwgf.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6274094388016580000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 用python写一个豆瓣小组的爬虫（一） | 品森 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=55666090";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">品森</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一人的呓语</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用python写一个豆瓣小组的爬虫（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-01T22:34:36+08:00" content="2016-05-01">
+              2016-05-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/01/用python写一个豆瓣小组的爬虫（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/01/用python写一个豆瓣小组的爬虫（一）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/01/用python写一个豆瓣小组的爬虫（一）/" class="leancloud_visitors" data-flag-title="用python写一个豆瓣小组的爬虫（一）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="用python写一个豆瓣小组的爬虫（一）"><a href="#用python写一个豆瓣小组的爬虫（一）" class="headerlink" title="用python写一个豆瓣小组的爬虫（一）"></a>用python写一个豆瓣小组的爬虫（一）</h2><p>这是一篇夹杂着大量私货的“技术贴”。</p>
+<p>豆瓣是一个神奇的网站。我大概是在07年的时候知道有豆瓣这个网站，然后在高考之后有一段时间整天泡在上边，每看完一部电影就上去标记为“看过”，写个短评，乐此不疲。豆瓣fm也是一个我非常喜欢的功能，我曾经最喜欢的事情之一就是一边听着私人电台，一边在阿尔法城逛来逛去（后来阿尔法城关掉了）。再写下去就要写成豆瓣的软文了，哈。不过确实想说，作为最早的一批90，豆瓣在当时有点像是早几年前的知乎，也像是40年代的魔兽世界，是一个令人怀念的小社区。</p>
+<p><a href="https://www.douban.com/group/" target="_blank" rel="external">豆瓣小组</a>不得不说是豆瓣比较成功的一个子产品，当时我初次接触的时候就觉得，“比百度贴吧不知道高到哪里去了”。也许是建筑学的教育背景让我培养了一丝的审美观，也可能是觉得豆瓣小组里的广告虽然也有但远没有那么<strong>人命关天</strong>，总之，看着舒服。这不算是对豆瓣的夸奖，因为事实上仅仅就产品本身将豆瓣小组与百度贴吧相比较，就足够令人生疑我是不是在黑豆瓣了。不是的，我只是在客观地表达作为一个用户的用户体验而已。<strong>不过需要澄清的是</strong>，我对于百度的不齿只局限于其决策层的所作所为（或者是不作为？），至于所有勤勤恳恳地码着代码的工程师、产品经理和设计师等等，谁不是在养家糊口呢？</p>
+<p>豆瓣小组确实也不是尽善尽美。豆瓣的数据获取实在不甚方便。之前写地址解析的时候调用过百度的API，用起来十分顺手和方便（毕竟是技术实力雄厚的公司），但是<strong>反观豆瓣的API调用，处处受限，而豆瓣小组干脆则是没有API的</strong>。在网络上搜集数据，一般来说有API最好，实在没有办法才写爬虫，毕竟前者多快好省而后者不但麻烦还有一点ethical controversy，搞不好容易吃上官司。（当然我这样子的小白就算是写爬虫也不至于惊动到这一步吧，😓）</p>
+<p><strong>好吧反正我就是要写一个爬虫，把豆瓣小组中我感兴趣的话题都收入囊中</strong>。</p>
+<p>以下内容假定读者了解python语法（comfortable about write codes longer than 100 lines）并了解python的包管理，具有对命令行的初步认识。此外，对HTML有个大体的认识会更有助于在阅读后举一反三。<strong>如果你已经比较了解爬虫，这篇博客可能不适合你，</strong>这篇文章面向的读者是初学者。<strong>但是</strong>, 就算你都不懂，这篇文章还有一个重要的目标读者群体是<strong>对数据感兴趣的城市规划师</strong>，这部分同学可以大概了解一下思路，然后去我的github把代码改一改直接就能做关于豆瓣用户的地域空间分布／勾搭od分析／<strong>男(女)p友走遍全国</strong>，等等这类奇葩的分析了，说不定你的python代码还能<a href="https://www.zhihu.com/question/30537262" target="_blank" rel="external">写1万行</a>呢。</p>
+<p>吐槽完毕，下边开始务实。</p>
+<hr>
+<h4 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h4><p>确认你有以下第三方库（我用python3）：</p>
+<ul>
+<li><a href="http://docs.python-requests.org/en/master/" target="_blank" rel="external">requests</a></li>
+<li><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#" target="_blank" rel="external">beautiful soup 4</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install requests</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install beautifulsoup4</div></pre></td></tr></table></figure>
+<p>本文中将会用到这两个第三方库。</p>
+<h4 id="二、解释本文爬虫的工作原理"><a href="#二、解释本文爬虫的工作原理" class="headerlink" title="二、解释本文爬虫的工作原理"></a>二、解释本文爬虫的工作原理</h4><blockquote>
+<p>访问网页，把整个页面的源代码抓取下来，分析页面源代码，抽取想要的信息，并存下来。即：</p>
+</blockquote>
+<ol>
+<li>获取网页</li>
+<li>抽取信息</li>
+</ol>
+<p>在这里，我用requests做抓取这一步，然后用beautifulsoup做分析这一步。虽然自带的urllib挺好的，但是python2和python3的urllib无法兼容，所以采用一个更不容易出问题的。这里的问题是指人犯错，而不是库有bug😂，蛤蛤。</p>
+<p>至于beautifulsoup，我觉得用着很是省心。除了因为暂时没有必(neng)要(li)自己造轮子外，用纯正则表达式来分析HTML的话，差不多可以拍一部电影叫做<em>Fifty shades of rex</em>了，但我没有这样的爱好，真的。不过话又说回来，五十度灰的男女主角身材真是好，通过强烈刺激观众大脑的某一区域，似乎成功地阻碍了另一部分区域正常发挥作用，这解释了为什么这部电影的豆瓣评分会远远高于我的预想。这外貌协会（又玛丽苏）的世界。</p>
+<p>所以明白了原理，<strong>let’s just shut the f*ck up and write some codes.</strong></p>
+<h4 id="三、首先，你要有一个…"><a href="#三、首先，你要有一个…" class="headerlink" title="三、首先，你要有一个…"></a>三、首先，你要有一个…</h4><p>这个节标题没有任何恶意🐶</p>
+<p>真的，我是指你要有一个<del>女朋友</del>目标小组。比如这个：</p>
+<p><img src="/images/groupiwgf.png" alt=""></p>
+<p>蛤蛤</p>
+<p>下边让我们一步一步来：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! python3</span></div><div class="line"><span class="comment"># code list part 1</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> bs4</div><div class="line"></div><div class="line"><span class="comment"># url: the target group's url</span></div><div class="line">url = <span class="string">"https://www.douban.com/group/needGF/discussion?start=0"</span></div><div class="line"><span class="comment"># now use requests to get the page's html file</span></div><div class="line">html = requests.get(url)</div><div class="line"></div><div class="line">print(html)</div><div class="line"><span class="comment"># to be continued...</span></div></pre></td></tr></table></figure>
+<p>也许你是在idle里写的这几行代码，也许是写在记事本里，总之运行它。你会发现整个网页的源码都print出来了。第一步完成啦，excited.</p>
+<h4 id="三、使用beautiful-soup解析网页"><a href="#三、使用beautiful-soup解析网页" class="headerlink" title="三、使用beautiful soup解析网页"></a>三、使用beautiful soup解析网页</h4><p>接着就是抽取想要的信息。本文只想做一步，就是获取帖子的<strong>标题</strong>，<strong>发帖人</strong>，<strong>回复数</strong>，<strong>最后回复时间</strong>以及<strong>发帖人主页链接</strong>和<strong>帖子链接</strong>。</p>
+<p>然而为什么需要链接呢？依我自己的经验，人有的时候真的会抑制不住好奇心去看看发了<strong>“叔帅还霸道，有钱”</strong>这样子的帖子是何方高富帅，也会想要去围观一下<strong>“楼主女，懂的来”</strong>这样的帖子，检验一下自己<del>懂不懂</del>革命意志是否坚定。开玩笑啦，其实保留链接的目的是为了做更为复杂的爬虫，即让爬虫可以继续顺着链接爬下去，这样才有可能得出所有用户的关系图。</p>
+<p>那么让我们来看看怎么做：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># adjacent to code list part 1</span></div><div class="line"><span class="comment"># this is code list part 2</span></div><div class="line">soup = bs4.BeautifulSoup(html.text, <span class="string">"lxml"</span>)</div><div class="line"><span class="comment"># the data are stored in a &lt;table&gt;</span></div><div class="line">table = soup.findAll(<span class="string">"table"</span>, &#123;<span class="string">"class"</span>: <span class="string">"olt"</span>&#125;)</div><div class="line"><span class="comment"># to be continued...</span></div></pre></td></tr></table></figure>
+<p>这一步，我们把网页源代码转化成了一个bs4.BeautifulSoup object，这样就可以进行后续的信息抽取了。具体的实现方式不是唯一的，事实上我个人感觉bs4这个库可以有很多方式做到同一件事，教条地说这并不很pythonic。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># adjacent to code list part 2</span></div><div class="line"><span class="comment"># this is code list part 3</span></div><div class="line"><span class="comment"># rows are rows in the table</span></div><div class="line">rows = list(table)[<span class="number">0</span>].findAll(<span class="string">"tr"</span>, &#123;<span class="string">"class"</span>: <span class="string">""</span>, <span class="string">"id"</span>: <span class="string">""</span>&#125;)</div><div class="line"><span class="keyword">for</span> row <span class="keyword">in</span> rows:</div><div class="line">    title = row.find(<span class="string">"td"</span>, &#123;<span class="string">"class"</span>: <span class="string">"title"</span>&#125;).a.attrs[<span class="string">"title"</span>]</div><div class="line">    title_url = row.find(<span class="string">"td"</span>, &#123;<span class="string">"class"</span>: <span class="string">"title"</span>&#125;).a.attrs[<span class="string">"href"</span>]</div><div class="line">    author = row.find(<span class="string">"td"</span>, &#123;<span class="string">"nowrap"</span>: <span class="string">"nowrap"</span>&#125;).a.text</div><div class="line">    author_url = row.find(<span class="string">"td"</span>, &#123;<span class="string">"nowrap"</span>: <span class="string">"nowrap"</span>&#125;).a.attrs[<span class="string">"href"</span>]</div><div class="line">    follow = row.find(<span class="keyword">lambda</span> tag: len(tag.attrs)==<span class="number">2</span> <span class="keyword">and</span> tag.name==<span class="string">"td"</span>).text</div><div class="line">    time = row.find(<span class="string">"td"</span>, &#123;<span class="string">"nowrap"</span>: <span class="string">"nowrap"</span>, <span class="string">"class"</span>: <span class="string">"time"</span>&#125;).text</div><div class="line"></div><div class="line">    print(title, title_url)</div><div class="line">    print(author, author_url)</div><div class="line">    print(follow)</div><div class="line">    print(time)</div><div class="line">    </div><div class="line"><span class="comment"># let's call it a day</span></div></pre></td></tr></table></figure>
+<p>通过这样子，我们就得到了一页当中的所有帖子的各项信息。如果有任何不懂，参看beautifulsoup的文档。</p>
+<h4 id="四、距离真正可以使用还差几步"><a href="#四、距离真正可以使用还差几步" class="headerlink" title="四、距离真正可以使用还差几步"></a>四、距离真正可以使用还差几步</h4><p>仅仅print出来是不可以接受的，因为一个真正的爬虫还至少需要能够把数据存起来。而且，之前的代码只是爬取了一页，我们还需要在外边套上一层循环。最后，考虑到限制，我们还需要使用代理，或者设置sleep time来慢慢爬，防止被服务器封印掉IP。</p>
+<p>但是我今天累了，劳动节要早点睡。晚安。</p>
+<p>别打我，我其实也没有写完呢。代码见我的GITHUB，或者直接戳这里：<a href="https://github.com/spencerpomme/screwpie" target="_blank" rel="external">screwpie</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/爬虫/" rel="tag">#爬虫</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/17/c多文件编译的命令行方法（gcc）/" rel="next" title="c多文件编译的命令行方法（gcc）">
+                <i class="fa fa-chevron-left"></i> c多文件编译的命令行方法（gcc）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/06/一颗敏感的小心脏/" rel="prev" title="一颗敏感的小心脏">
+                一颗敏感的小心脏 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/01/用python写一个豆瓣小组的爬虫（一）/"
+     data-title="用python写一个豆瓣小组的爬虫（一）"
+     data-content=""
+     data-url="http://spencerpomme.github.io/2016/05/01/用python写一个豆瓣小组的爬虫（一）/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/01/用python写一个豆瓣小组的爬虫（一）/"
+           data-title="用python写一个豆瓣小组的爬虫（一）" data-url="http://spencerpomme.github.io/2016/05/01/用python写一个豆瓣小组的爬虫（一）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="工常邵" />
+          <p class="site-author-name" itemprop="name">工常邵</p>
+          <p class="site-description motion-element" itemprop="description">看书，做饭，写代码</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/spencerpomme" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/spencerpomme" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/gong-chang-shao" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-bookmark"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用python写一个豆瓣小组的爬虫（一）"><span class="nav-number">1.</span> <span class="nav-text">用python写一个豆瓣小组的爬虫（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、前期准备"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、前期准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、解释本文爬虫的工作原理"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、解释本文爬虫的工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、首先，你要有一个…"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、首先，你要有一个…</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、使用beautiful-soup解析网页"><span class="nav-number">1.0.4.</span> <span class="nav-text">三、使用beautiful soup解析网页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、距离真正可以使用还差几步"><span class="nav-number">1.0.5.</span> <span class="nav-text">四、距离真正可以使用还差几步</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">工常邵</span>
+</div>
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"spencerpomme"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("fX9Oe9N2JLQmJzU6AcUpshM9-gzGzoHsz", "geghfozxaInQ6gmKJ1pLnOTo");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
